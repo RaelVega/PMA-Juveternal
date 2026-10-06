@@ -2,10 +2,12 @@
 // Requiere una sesión: npx wrangler login (una sola vez). Crea el proyecto si no existe.
 // Uso: npm run publicar:cloudflare
 import { execFileSync } from 'node:child_process';
+import path from 'node:path';
 
 const PROYECTO = 'pma-juveternal';
 const WRANGLER = ['--yes', 'wrangler@4'];
-const RAIZ = new URL('../..', import.meta.url).pathname;
+// path.resolve y no new URL(): la ruta del proyecto tiene espacios y la URL los convierte en %20.
+const RAIZ = path.resolve(import.meta.dirname, '../..');
 const correr = (comando, args, opciones = {}) => execFileSync(comando, args, { cwd: RAIZ, stdio: 'inherit', ...opciones });
 
 correr('npm', ['run', 'build']);
