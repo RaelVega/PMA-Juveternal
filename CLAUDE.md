@@ -4,7 +4,7 @@ Pantalla táctil dual (vertical 1080×1920, `.exe` en Windows) para el stand de 
 
 **Todo en español:** respuestas, comentarios, identificadores y mensajes de commit. Los commits van sin línea de coautoría.
 
-Repositorio: https://github.com/RaelVega/PMA-Juveternal (**privado**: lleva el catálogo y las imágenes del cliente; rama `main`). Sin GitHub Pages ni Netlify por ahora.
+Repositorio: https://github.com/RaelVega/PMA-Juveternal (**público** desde el 06-10, como el de Biocaps; rama `main`). Lo que va en él lo ve cualquiera: nunca se versionan `assets-fuente/`, `entrada/`, `paquetes/` ni `leads/`. Sin GitHub Pages ni Netlify por ahora.
 
 ## Fuente de verdad
 
