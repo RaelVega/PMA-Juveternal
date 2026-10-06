@@ -101,7 +101,15 @@ export function chequearVideo(video: HTMLVideoElement): Promise<ResultadoChequeo
     () =>
       new Promise<string>((resolver, rechazar) => {
         let tiempoAnterior = -1;
+        let saltado = false;
         const alActualizar = (): void => {
+          // Si ya arrancó solo y es largo (el del salvapantallas dura ~40 s), se salta al final para ver la vuelta enseguida.
+          if (!saltado && video.currentTime > 0.5 && Number.isFinite(video.duration) && video.duration > 6) {
+            saltado = true;
+            tiempoAnterior = -1;
+            video.currentTime = video.duration - 1.5;
+            return;
+          }
           if (tiempoAnterior > 1 && video.currentTime < tiempoAnterior - 1) {
             video.removeEventListener('timeupdate', alActualizar);
             resolver(`${video.videoWidth}×${video.videoHeight} · dio la vuelta al bucle`);
