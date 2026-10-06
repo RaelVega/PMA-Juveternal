@@ -6,10 +6,10 @@
   display: grid;
   place-items: center;
   padding: 0;
-  border: 2px solid var(--naranja-anahuac);
+  border: 2px solid var(--color-flecha, var(--naranja-anahuac));
   border-radius: 50%;
   background: var(--superficie);
-  color: var(--naranja-anahuac);
+  color: var(--color-flecha, var(--naranja-anahuac));
   box-shadow: var(--sombra-control);
   touch-action: manipulation;
 }

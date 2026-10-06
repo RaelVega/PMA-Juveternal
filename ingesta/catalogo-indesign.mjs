@@ -2,7 +2,7 @@
 //   contenido/catalogos/<id>/paginas/pagina-NN.html  fragmento limpio de cada página (sin scripts ni on*)
 //   contenido/catalogos/<id>/img/*.webp               cada imagen al tamaño al que se dibuja
 //   contenido/catalogos/<id>/video/*.mp4              sin pista de audio
-//   contenido/catalogos/<id>/estilos.css              el CSS de InDesign acotado a .indesign, con nuestras fuentes
+//   contenido/catalogos/<id>/estilos.css              el CSS de InDesign acotado a su catálogo, con nuestras fuentes
 //   contenido/catalogos/<id>/catalogo.json            orden de páginas e imágenes por página (para la precarga)
 //   pruebas/visual/referencias/<id>/pagina-NN.png     el export original en Chrome, ya animado: la «página completa»
 // Las acciones de los botones (data-clickactions…) se conservan tal cual: las interpreta
@@ -36,8 +36,13 @@ function slug(texto) {
   return texto.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\.[a-z0-9]+$/i, '').replace(/[^A-Za-z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase();
 }
 
-/** Acota cada regla a `.indesign` (salvo @keyframes y @font-face, que se dejan o se quitan). */
-function acotarCss(css, reescribirUrl) {
+/**
+ * Acota cada regla a su catálogo (`.indesign[data-catalogo="<id>"]`) y pone el id delante de los nombres de
+ * @keyframes: cada export de InDesign numera desde cero (#_idContainer043, _idGenKeyFrames-2…) y con dos
+ * catálogos cargados a la vez sus reglas chocarían.
+ */
+function acotarCss(css, reescribirUrl, id) {
+  const raiz = `.indesign[data-catalogo="${id}"]`;
   let salida = '';
   let i = 0;
   while (i < css.length) {
@@ -50,10 +55,12 @@ function acotarCss(css, reescribirUrl) {
     const cuerpo = css.slice(abre + 1, j - 1);
     i = j;
     if (/^@font-face/i.test(cabecera)) continue; // las fuentes las pone la app
-    if (/^@(-webkit-)?keyframes/i.test(cabecera)) { salida += `${cabecera} {${cuerpo}}\n`; continue; }
-    if (/^@media/i.test(cabecera)) { salida += `${cabecera} {\n${acotarCss(cuerpo, reescribirUrl)}}\n`; continue; }
-    const selectores = cabecera.split(',').map((s) => s.trim()).filter(Boolean).map((s) => (/^(html|body)\b/i.test(s) ? s.replace(/^(html|body)\b/i, '.indesign') : `.indesign ${s}`));
-    salida += `${selectores.join(', ')} {${reescribirUrl(cuerpo)}}\n`;
+    if (/^@(-webkit-)?keyframes/i.test(cabecera)) { salida += `${cabecera.replace(/(keyframes\s+)(\S+)/i, `$1${id}-$2`)} {${cuerpo}}\n`; continue; }
+    if (/^@media/i.test(cabecera)) { salida += `${cabecera} {\n${acotarCss(cuerpo, reescribirUrl, id)}}\n`; continue; }
+    const selectores = cabecera.split(',').map((s) => s.trim()).filter(Boolean).map((s) => (/^(html|body)\b/i.test(s) ? s.replace(/^(html|body)\b/i, raiz) : `${raiz} ${s}`));
+    // Las animaciones apuntan a los @keyframes renombrados.
+    const conAnimacion = reescribirUrl(cuerpo).replace(/((?:-webkit-)?animation(?:-name)?\s*:\s*)(_idGenKeyFrames-\d+)/gi, `$1${id}-$2`);
+    salida += `${selectores.join(', ')} {${conAnimacion}}\n`;
   }
   return salida;
 }
@@ -205,7 +212,7 @@ export async function ingerirCatalogo({ id, exportDir, RAIZ, fuentes, sustitutas
     }
     return cuerpo;
   };
-  const css = acotarCss(cssOrigen, (cuerpo) => conVariacion(cuerpo.replace(/url\((["']?)(\.\.\/image\/[^"')]+)\1\)/g, (_, _c, ruta) => `url("img/${fondos.get(ruta)}")`)));
+  const css = acotarCss(cssOrigen, (cuerpo) => conVariacion(cuerpo.replace(/url\((["']?)(\.\.\/image\/[^"')]+)\1\)/g, (_, _c, ruta) => `url("img/${fondos.get(ruta)}")`)), id);
   const cara = (familia, archivo, peso) => `@font-face { font-family: "${familia}"; src: url("../../${archivo}") format("truetype"); ${peso ? `font-weight: ${peso}; ` : ''}font-display: block; }\n`;
   const caras =
     '/* Generado por ingesta/catalogo-indesign.mjs: no editar a mano. */\n' +

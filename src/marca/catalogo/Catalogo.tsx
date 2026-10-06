@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, type Variants } from 'motion/react';
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { urlContenido } from '../../motor/contenido/cargar';
 import { useMovimientoReducido } from '../../motor/movimiento/useMovimientoReducido';
 import { useContenido, useDespachar, useFlujo, useRecursos } from '../estado';
@@ -41,6 +41,8 @@ export function Catalogo(): ReactNode {
   const despachar = useDespachar();
   const textos = useContenido().catalogo;
   const catalogo = useRecursos().catalogos[id ?? ''];
+  const marca = useContenido().selector.marcas.find((m) => m.catalogo === id);
+  const todas = marca?.flechas !== 'extremos';
   const reducido = useMovimientoReducido();
   // Con una ficha abierta las flechas se apartan: no tapan la ficha y se cierra con su ✕.
   const [fichaAbierta, setFichaAbierta] = useState(false);
@@ -63,10 +65,10 @@ export function Catalogo(): ReactNode {
   const retroceder = (): void => (pagina === 0 ? despachar({ tipo: 'retroceder' }) : irA(pagina - 1));
 
   return (
-    <div className={estilos.catalogo}>
+    <div className={estilos.catalogo} style={marca ? ({ '--color-flecha': marca.color } as CSSProperties) : undefined}>
       <AnimatePresence mode="popLayout" initial={false} custom={direccion}>
         <motion.div key={pagina} className={estilos.capa} custom={direccion} variants={variantes(reducido)} initial="entra" animate="visible" exit="sale">
-          <PaginaInDesign html={actual.html} alIrA={irA} alCambiarFicha={setFichaAbierta} />
+          <PaginaInDesign html={actual.html} catalogo={catalogo?.id ?? ''} alIrA={irA} alCambiarFicha={setFichaAbierta} />
         </motion.div>
       </AnimatePresence>
       <AnimatePresence>
@@ -78,10 +80,11 @@ export function Catalogo(): ReactNode {
             animate={{ opacity: 1, transition: { duration: DURACION.entrada / 1000, ease: CURVA_ESTANDAR } }}
             exit={{ opacity: 0, transition: { duration: DURACION.salida / 1000, ease: CURVA_ESTANDAR } }}
           >
-            <Flecha sentido="anterior" etiqueta={textos.anterior} alTocar={retroceder} />
+            {/* Si el diseño trae sus flechas (Juveternal), las nuestras solo donde él no da salida: ← en la portada, → al final. */}
+            {(todas || pagina === 0) && <Flecha sentido="anterior" etiqueta={textos.anterior} alTocar={retroceder} />}
             {/* En la última página, «siguiente» lleva a los leads (la misma pantalla al final de cualquier catálogo). */}
             {pagina < paginas.length - 1 ? (
-              <Flecha sentido="siguiente" etiqueta={textos.siguiente} alTocar={() => irA(pagina + 1)} />
+              todas && <Flecha sentido="siguiente" etiqueta={textos.siguiente} alTocar={() => irA(pagina + 1)} />
             ) : (
               <Flecha sentido="siguiente" etiqueta={textos.finalizar} alTocar={() => despachar({ tipo: 'avanzar', origen: 'visitante' })} />
             )}

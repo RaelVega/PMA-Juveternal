@@ -25,7 +25,8 @@ Repositorio: https://github.com/RaelVega/PMA-Juveternal (**público** desde el 0
 - `PaginaInDesign.tsx` reproduce el comportamiento: animaciones de entrada (sus keyframes son solo `transform`/`opacity`), fichas que aparecen con fundido (solo `opacity`: sus contenedores ya tienen `transform`), «INICIO» a la portada del catálogo y video con las reglas de `VideoBucle`.
 - Páginas: `publication.html` es la 0; `publication-N.html`, la N. Desde la página 0, «anterior» vuelve al salvapantallas y reinicia la sesión. Con una ficha abierta, las flechas se ocultan.
 - Fuentes: el CSS pide «Montserrat Thin» con `font-variation-settings`; la cubre `contenido/fuentes/Montserrat-Variable.ttf` (OFL, se llama así por dentro). Las que el export pide y no vinieron se sirven **con su mismo nombre de familia** desde la libre más parecida (`sustitutas` en `ingesta/equivalencias.json`): Speeday → Rubik Black Italic (forzada a «wght» 850), Brush Script MT → Yellowtail. La referencia se genera con las mismas sustitutas.
-- Juveternal: cuando llegue su export, se añade a `catalogos` en `ingesta/equivalencias.json`, se pone `"catalogo": "juveternal"` en su marca de `contenido.json` y la flecha toma su color.
+- **Cada CSS va acotado a su catálogo** (`.indesign[data-catalogo="<id>"]`) y sus `@keyframes` llevan el id delante: cada export numera desde cero (`#_idContainer043`, `_idGenKeyFrames-2`) y con dos catálogos cargados a la vez sus reglas chocaban.
+- **Juveternal** (06-10, `CATÁLOGO JUVETERNAL 2026`, la misma publicación que https://indd.adobe.com/view/8ea9ccb2-6266-4a6d-ac01-5ee5aa54a266): 29 páginas, todo en imágenes (no usa fuentes), con sus propias flechas ← → e inicio. Por eso su marca lleva `"flechas": "extremos"`: las nuestras solo salen en su portada (← al selector) y en su última página (→ a los leads). Anáhuac, sin flechas en el diseño, lleva `"todas"`. Cada marca declara también el `color` de nuestras flechas.
 
 ## Leads, despedida, aviso y fallo
 

@@ -57,10 +57,6 @@ comprobar((await diferencia(path.join(SALIDA, 'portada.png'), path.join(REF, 'po
 await pagina.waitForTimeout(2600);
 await captura('portada-bucle');
 
-await pagina.mouse.click(270, 1000);
-await pagina.waitForTimeout(400);
-comprobar((await paso()) === 'selector', 'Juveternal (sin catálogo aún) no sale del selector');
-
 await pagina.mouse.click(810, 1000);
 await pagina.waitForTimeout(600);
 comprobar((await paso()) === 'catalogo', 'Anáhuac abre su catálogo');
@@ -164,6 +160,43 @@ await pagina.waitForTimeout(600);
 for (let n = 1; n <= 6; n++) { await flecha('Página siguiente').click(); await pagina.waitForTimeout(90); }
 await pagina.waitForTimeout(3600);
 await pagina.screenshot({ path: path.join(SALIDA, 'fuente-speeday-pag06.png'), clip: { x: 0, y: 150, width: 1080, height: 300 } });
+
+// Juveternal: trae sus propias flechas; las nuestras solo en la portada (←, al selector) y al final (→, a los leads).
+await pagina.goto(URL);
+await pagina.waitForSelector('[data-paso="portada"]', { timeout: 15_000 });
+await aSelector();
+await pagina.waitForTimeout(500);
+await pagina.mouse.click(270, 1000);
+await pagina.waitForTimeout(600);
+comprobar((await paso()) === 'catalogo', 'Juveternal abre su catálogo');
+const totalJ = JSON.parse(readFileSync(path.join(RAIZ, 'contenido/catalogos/juveternal/catalogo.json'), 'utf8')).paginas.length;
+comprobar((await flecha('Página anterior').count()) === 1 && (await flecha('Página siguiente').count()) === 0, 'Juveternal: en su portada solo nuestra ← (al selector)');
+const botonDisenio = (n) => pagina.locator(`.indesign ._idGenButton:not(._idGenStateHide)[data-clickactions*="'publication${n === 0 ? '' : `-${n}`}.html'"]`).first();
+for (let n = 0; n < totalJ; n++) {
+  // force: toca en su sitio como un dedo; si otro botón al mismo destino lo cubre, recibe él el toque.
+  if (n > 0) await botonDisenio(n).click({ force: true });
+  await pagina.waitForTimeout(3600);
+  const nombre = `juveternal-${String(n).padStart(2, '0')}`;
+  await pagina.addStyleTag({ content: 'button[aria-label^="Página"],button[aria-label^="Ir a"]{visibility:hidden}' }).then((h) => h.evaluate((e) => e.setAttribute('data-temporal', '')));
+  await captura(`${nombre}-sin-flechas`);
+  await pagina.evaluate(() => document.querySelector('style[data-temporal]')?.remove());
+  await captura(nombre);
+  const d = await diferencia(path.join(SALIDA, `${nombre}-sin-flechas.png`), path.join(REF, 'juveternal', `pagina-${String(n).padStart(2, '0')}.png`));
+  comprobar(d < TOLERANCIA, `Juveternal página ${n} igual a InDesign (diferencia ${d.toFixed(1)})`);
+  rmSync(path.join(SALIDA, `${nombre}-sin-flechas.png`));
+  if (n === 5) comprobar((await flecha('Página anterior').count()) === 0 && (await flecha('Página siguiente').count()) === 0, 'Juveternal: en páginas intermedias no salen nuestras flechas');
+}
+comprobar((await flecha('Ir a dejar mis datos').count()) === 1, 'Juveternal: en la última página nuestra → lleva a los leads');
+// Su botón de inicio vuelve a la portada del catálogo; INICIAR entra a la página 1 y un «VER MÁS» abre su ficha.
+await botonDisenio(0).click({ force: true });
+await pagina.waitForTimeout(800);
+await botonDisenio(1).click({ force: true });
+await pagina.waitForTimeout(3600);
+const antesJ = await visibles();
+await pagina.locator('.indesign ._idGenButton:not(._idGenStateHide)[data-clickactions*="onShow"]').first().click();
+await pagina.waitForTimeout(500);
+await captura('juveternal-01-ficha');
+comprobar((await visibles()) !== antesJ, 'Juveternal: «VER MÁS» abre su ficha');
 
 // Captura en horizontal (laptop): el lienzo se escala como bloque.
 await pagina.setViewportSize({ width: 1440, height: 900 });

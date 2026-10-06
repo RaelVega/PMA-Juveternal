@@ -9,6 +9,8 @@ const SELECTOR_BOTON = '[data-clickactions], [data-releaseactions], [data-animat
 interface Propiedades {
   /** HTML de la página generado por la ingesta (sin scripts ni on*). */
   html: string;
+  /** Id del catálogo: su CSS va acotado a `.indesign[data-catalogo="<id>"]`. */
+  catalogo: string;
   alIrA: (pagina: number) => void;
   /** Avisa si hay alguna ficha abierta (algo que estaba oculto al cargar la página y ahora se ve). */
   alCambiarFicha?: (abierta: boolean) => void;
@@ -20,7 +22,7 @@ interface Propiedades {
  * que muestran y ocultan fichas, «ir a» y el video. Las fichas aparecen con un
  * fundido (solo opacity: sus contenedores ya llevan transform propio).
  */
-export function PaginaInDesign({ html, alIrA, alCambiarFicha }: Propiedades): ReactNode {
+export function PaginaInDesign({ html, catalogo, alIrA, alCambiarFicha }: Propiedades): ReactNode {
   const refRaiz = useRef<HTMLDivElement>(null);
   const refIrA = useRef(alIrA);
   refIrA.current = alIrA;
@@ -170,5 +172,5 @@ export function PaginaInDesign({ html, alIrA, alCambiarFicha }: Propiedades): Re
     };
   }, [html, reducido]);
 
-  return <div ref={refRaiz} className={`indesign ${estilos.pagina}`} />;
+  return <div ref={refRaiz} className={`indesign ${estilos.pagina}`} data-catalogo={catalogo} />;
 }

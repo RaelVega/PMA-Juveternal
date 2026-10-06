@@ -29,6 +29,10 @@ export const esquemaContenido = v.object({
           zona: v.tuple([v.number(), v.number(), v.number(), v.number()]),
           /** Id del catálogo que abre, o null si aún no existe (toca y no pasa nada). */
           catalogo: v.nullable(texto),
+          /** Color de la marca (nuestras flechas en su catálogo). */
+          color: v.pipe(v.string(), v.hexColor()),
+          /** «todas»: el diseño no trae flechas; «extremos»: las trae y las nuestras solo van en la primera y la última página. */
+          flechas: v.picklist(['todas', 'extremos']),
         }),
       ),
       v.length(2),

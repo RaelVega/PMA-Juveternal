@@ -68,6 +68,9 @@
   "catalogos": {
     "anahuac": {
       "archivo": "catalogos/anahuac/catalogo.json"
+    },
+    "juveternal": {
+      "archivo": "catalogos/juveternal/catalogo.json"
     }
   }
 }

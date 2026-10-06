@@ -1,7 +1,6 @@
 {
   "version": 1,
   "_pendientes": [
-    "Juveternal: falta su proyecto de InDesign (y las fichas). Mientras tanto, tocar su lado del salvapantallas no abre nada (marcas.juveternal.catalogo = null).",
     "Icono del ejecutable y favicon: provisionales (ingesta/icono.mjs); falta el de marketing.",
     "Catálogo Anáhuac: Speeday (pág. 6) y Brush Script MT (pág. 14) no vinieron; se usan las libres más parecidas, Rubik Black Italic y Yellowtail (decisión de Rael, 06-10).",
     "Textos de leads, despedida, aviso de inactividad y fallo: redacción propia con la identidad del salvapantallas; marketing los revisa.",
@@ -58,7 +57,9 @@
           540,
           1280
         ],
-        "catalogo": null
+        "catalogo": "juveternal",
+        "color": "#28b2a9",
+        "flechas": "extremos"
       },
       {
         "id": "anahuac",
@@ -84,7 +85,9 @@
           540,
           1280
         ],
-        "catalogo": "anahuac"
+        "catalogo": "anahuac",
+        "color": "#e94e1a",
+        "flechas": "todas"
       }
     ]
   },
@@ -276,5 +279,6 @@
     "destinoNavegador": "En la carpeta de descargas",
     "fallo": "NO SE PUDIERON EXPORTAR LOS LEADS",
     "falloDetalle": "Vuelve a intentarlo con Ctrl+Shift+E"
-  }
+  },
+  "_flechas": "selector.marcas[].flechas: «todas» si el diseño del catálogo no trae flechas (Anáhuac); «extremos» si las trae (Juveternal, 06-10): las nuestras solo salen donde el diseño no da salida, ← en la portada del catálogo (al selector) y → en la última página (a los leads)."
 }
