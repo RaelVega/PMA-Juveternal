@@ -4,7 +4,7 @@ Pantalla táctil dual (vertical 1080×1920, `.exe` en Windows) para el stand de 
 
 **Todo en español:** respuestas, comentarios, identificadores y mensajes de commit. Los commits van sin línea de coautoría.
 
-Repositorio: https://github.com/RaelVega/PMA-Juveternal (**público** desde el 06-10, como el de Biocaps; rama `main`). Lo que va en él lo ve cualquiera: nunca se versionan `assets-fuente/`, `entrada/`, `paquetes/` ni `leads/`. Sin GitHub Pages ni Netlify por ahora.
+Repositorio: https://github.com/RaelVega/PMA-Juveternal (**público** desde el 06-10, como el de Biocaps; rama `main`). Lo que va en él lo ve cualquiera: nunca se versionan `assets-fuente/`, `entrada/`, `paquetes/` ni `leads/`. Publicado en **GitHub Pages** (https://raelvega.github.io/PMA-Juveternal/, en cada push, `.github/workflows/publicar-pages.yml`) y en **Cloudflare Pages** (https://pma-juveternal.pages.dev, a mano con `npm run publicar:cloudflare`). Sin Netlify.
 
 ## Fuente de verdad
 
@@ -23,6 +23,14 @@ Repositorio: https://github.com/RaelVega/PMA-Juveternal (**público** desde el 0
 - El export «HTML5 de diseño fijo» se convierte, no se incrusta: Chrome lee cada `publication*.html` sin JS, se guarda el HTML limpio (sin `<script>` ni `on*`), cada imagen pasa a WebP **al tamaño al que se dibuja**, el video pierde el audio y el CSS se acota a `.indesign`. De paso guarda la «página completa» de cada página (el export original, ya animado) en `pruebas/visual/referencias/<id>/`.
 - Las acciones de InDesign (`data-clickactions`, `onShow`/`onHide`, `goToDestination`, `playAnimation`, `onMediaStart`) las interpreta `src/marca/catalogo/acciones.ts` **sin `eval`**. Si un export trae otra, la ingesta falla: se añade ahí con su prueba.
 - `PaginaInDesign.tsx` reproduce el comportamiento: animaciones de entrada (sus keyframes son solo `transform`/`opacity`), fichas que aparecen con fundido (solo `opacity`: sus contenedores ya tienen `transform`), «INICIO» a la portada del catálogo y video con las reglas de `VideoBucle`.
+- **Eventos como en el motor de InDesign** (`PaginaInDesign.tsx`): `data-clickactions` al **presionar** y `data-releaseactions` sobre lo que haya bajo el dedo al **soltar** (no sobre donde empezó), y solo si el gesto empezó en esa página. Ejecutar las dos al soltar hacía reaparecer la ✕ de Juveternal (págs. 4 y 5) y que sus flechas se saltaran una página.
+- **Errores del export, corregidos en la ingesta** (`catalogos[]` de `equivalencias.json`; la referencia y `pruebas/visual/fichas.mjs` aplican lo mismo):
+  - `mover`: páginas fuera de su sitio. Juveternal: Melatonina y Shilajit van detrás del Magnesio (págs. 13 y 14 contando la portada como 1). Los destinos de las flechas del diseño se reescriben al orden nuevo (la contigua del orden original → la contigua del nuevo).
+  - `noMostrarAlCargar`: elementos que InDesign abre solos y no deben. Juveternal, Glow: la ficha de Vitamina E se abría sola, sin ✕, tapando los «VER MÁS».
+  - `corregirAcciones`: acciones mal copiadas en un botón. Juveternal, Glow: el primer «VER MÁS» animaba la ficha del otro producto y salían las dos encimadas.
+  - `imagenInicio`: imagen de la casa. Esos botones se marcan como `goToDestination('inicio')` y van al **selector de empresa**, no a la portada del catálogo (Rael, 06-10). La ← de la página 1 sigue yendo a la portada del catálogo.
+  - `insertarLogo`: el logo de Juveternal en su contraportada (antes de los leads), recortado de su portada con el fondo vuelto transparente.
+- `npm run fichas` abre y cierra **todas** las fichas de los dos catálogos a la vez en el export original (su JS) y en la app, y compara: lo que queda visible, la imagen y que la ✕ deje la página como estaba.
 - Páginas: `publication.html` es la 0; `publication-N.html`, la N. Desde la página 0, «anterior» vuelve al salvapantallas y reinicia la sesión. Con una ficha abierta, las flechas se ocultan.
 - Fuentes: el CSS pide «Montserrat Thin» con `font-variation-settings`; la cubre `contenido/fuentes/Montserrat-Variable.ttf` (OFL, se llama así por dentro). Las que el export pide y no vinieron se sirven **con su mismo nombre de familia** desde la libre más parecida (`sustitutas` en `ingesta/equivalencias.json`): Speeday → Rubik Black Italic (forzada a «wght» 850), Brush Script MT → Yellowtail. La referencia se genera con las mismas sustitutas.
 - **Cada CSS va acotado a su catálogo** (`.indesign[data-catalogo="<id>"]`) y sus `@keyframes` llevan el id delante: cada export numera desde cero (`#_idContainer043`, `_idGenKeyFrames-2`) y con dos catálogos cargados a la vez sus reglas chocaban.
@@ -66,6 +74,7 @@ npm run visual [-- <url>]  # recorrido completo contra 4183 + comparación con I
 npm run electron:dev       # build + Electron en ventana
 npm run empaquetar:win     # paquetes/win-unpacked/PMA-Juveternal.exe
 npm run armar:usb          # paquetes/PMA-Juveternal-USB (vías A, B y B′ + LEEME)
+npm run fichas             # todas las fichas, comparadas con el export original (≈15 min)
 npm run motor:comparar     # ¿el motor sigue igual al de Biocaps?
 HUMO_SALIR=1 DIR_CONTENIDO=dist/contenido npx electron .   # prueba técnica en Electron
 ```

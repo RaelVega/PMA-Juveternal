@@ -24,7 +24,9 @@
     "icono": "node ingesta/icono.mjs",
     "visual": "node pruebas/visual/recorrido.mjs",
     "motor:comparar": "node scripts/motor.mjs comparar",
-    "motor:traer": "node scripts/motor.mjs traer"
+    "motor:traer": "node scripts/motor.mjs traer",
+    "fichas": "node pruebas/visual/fichas.mjs",
+    "publicar:cloudflare": "node cascaras/web/publicar-cloudflare.mjs"
   },
   "devDependencies": {
     "@testing-library/react": "^16.3.3",

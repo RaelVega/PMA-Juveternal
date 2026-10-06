@@ -97,11 +97,12 @@ comprobar((await visibles()) === antes, 'la ✕ cierra la ficha y vuelven los bo
 await pagina.waitForTimeout(300);
 comprobar((await flecha('Página anterior').count()) === 1, 'al cerrar la ficha vuelven las flechas');
 
-// INICIO del diseño → portada del catálogo; «anterior» desde ahí → salvapantallas.
-await pagina.locator('.indesign ._idGenButton:not(._idGenStateHide)[data-clickactions*="goToDestination"]').first().click();
-await pagina.waitForTimeout(600);
-const enPortadaCatalogo = await pagina.evaluate(() => !!document.querySelector('.indesign video'));
-comprobar(enPortadaCatalogo, 'INICIO lleva a la portada del catálogo');
+// INICIO (la casa) del diseño → selector de empresa; «anterior» desde la portada del catálogo → selector.
+await pagina.locator(`.indesign ._idGenButton:not(._idGenStateHide)[data-clickactions*="'inicio'"]`).first().click({ force: true });
+await pagina.waitForTimeout(800);
+comprobar((await paso()) === 'selector', 'INICIO (la casa) lleva al selector de empresa');
+await pagina.mouse.click(810, 1000);
+await pagina.waitForTimeout(800);
 await flecha('Página anterior').click();
 await pagina.waitForTimeout(600);
 comprobar((await paso()) === 'selector', '«anterior» desde la portada del catálogo vuelve al selector');
@@ -187,8 +188,13 @@ for (let n = 0; n < totalJ; n++) {
   if (n === 5) comprobar((await flecha('Página anterior').count()) === 0 && (await flecha('Página siguiente').count()) === 0, 'Juveternal: en páginas intermedias no salen nuestras flechas');
 }
 comprobar((await flecha('Ir a dejar mis datos').count()) === 1, 'Juveternal: en la última página nuestra → lleva a los leads');
-// Su botón de inicio vuelve a la portada del catálogo; INICIAR entra a la página 1 y un «VER MÁS» abre su ficha.
-await botonDisenio(0).click({ force: true });
+await captura('juveternal-ultima-con-logo');
+comprobar(await pagina.locator('.indesign .logo-insertado img').isVisible(), 'Juveternal: la contraportada lleva el logo');
+// Su casa lleva al selector de empresa; se vuelve a entrar, INICIAR lleva a la página 1 y un «VER MÁS» abre su ficha.
+await pagina.locator(`.indesign ._idGenButton:not(._idGenStateHide)[data-clickactions*="'inicio'"]`).first().click({ force: true });
+await pagina.waitForTimeout(800);
+comprobar((await paso()) === 'selector', 'Juveternal: la casa lleva al selector de empresa');
+await pagina.mouse.click(270, 1000);
 await pagina.waitForTimeout(800);
 await botonDisenio(1).click({ force: true });
 await pagina.waitForTimeout(3600);

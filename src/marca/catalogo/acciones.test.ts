@@ -9,6 +9,10 @@ describe('acciones de InDesign', () => {
     ]);
   });
 
+  it('el botón de inicio (marcado por la ingesta) va al selector', () => {
+    expect(interpretarAcciones("goToDestination('inicio');")).toEqual([{ tipo: 'inicio' }]);
+  });
+
   it('ir a la portada o a una página', () => {
     expect(interpretarAcciones("goToDestination('publication.html');")).toEqual([{ tipo: 'irA', pagina: 0 }]);
     expect(interpretarAcciones("goToDestination('publication-25.html');")).toEqual([{ tipo: 'irA', pagina: 25 }]);

@@ -12,6 +12,8 @@ interface Propiedades {
   /** Id del catálogo: su CSS va acotado a `.indesign[data-catalogo="<id>"]`. */
   catalogo: string;
   alIrA: (pagina: number) => void;
+  /** Botón de inicio del diseño: vuelve al selector de empresa. */
+  alInicio: () => void;
   /** Avisa si hay alguna ficha abierta (algo que estaba oculto al cargar la página y ahora se ve). */
   alCambiarFicha?: (abierta: boolean) => void;
 }
@@ -22,10 +24,12 @@ interface Propiedades {
  * que muestran y ocultan fichas, «ir a» y el video. Las fichas aparecen con un
  * fundido (solo opacity: sus contenedores ya llevan transform propio).
  */
-export function PaginaInDesign({ html, catalogo, alIrA, alCambiarFicha }: Propiedades): ReactNode {
+export function PaginaInDesign({ html, catalogo, alIrA, alInicio, alCambiarFicha }: Propiedades): ReactNode {
   const refRaiz = useRef<HTMLDivElement>(null);
   const refIrA = useRef(alIrA);
   refIrA.current = alIrA;
+  const refInicio = useRef(alInicio);
+  refInicio.current = alInicio;
   const refFicha = useRef(alCambiarFicha);
   refFicha.current = alCambiarFicha;
   const reducido = useMovimientoReducido();
@@ -97,6 +101,9 @@ export function PaginaInDesign({ html, catalogo, alIrA, alCambiarFicha }: Propie
           case 'irA':
             refIrA.current(accion.pagina);
             break;
+          case 'inicio':
+            refInicio.current();
+            break;
           case 'animar': {
             const el = accion.id ? porId(accion.id) : propio;
             if (el) animar(el, accion.clase, accion.retrasoS, accion.ocultarAlTerminar);
@@ -126,42 +133,60 @@ export function PaginaInDesign({ html, catalogo, alIrA, alCambiarFicha }: Propie
     for (const el of raiz.querySelectorAll<HTMLElement>('[data-animationonpageloadactions]')) ejecutar(interpretarAcciones(el.getAttribute('data-animationonpageloadactions')), el);
     for (const el of raiz.querySelectorAll<HTMLElement>('[data-mediaonpageloadactions]')) ejecutar(interpretarAcciones(el.getAttribute('data-mediaonpageloadactions')), el);
 
-    // Respuesta visual en pointerdown (< 100 ms) y acción al soltar, como el click de InDesign.
+    /*
+     * Eventos como en el motor de InDesign: las acciones «clic» (data-clickactions) se ejecutan al
+     * PRESIONAR el botón y las de «soltar» (data-releaseactions y las de la propia animación) sobre lo
+     * que haya bajo el dedo al LEVANTARLO. Importa: al presionar una ✕ la ficha y la ✕ se ocultan, y al
+     * soltar ya no hay ✕ debajo, así que su «soltar» (que vuelve a animarla) no debe ejecutarse. Si se
+     * ejecutaban las dos al soltar, la ✕ volvía a aparecer flotando (Juveternal, págs. 4 y 5).
+     */
     const presionados = new Set<Element>();
+    // El gesto pertenece a la página donde empezó: si al presionar se cambió de página (las flechas de
+    // Juveternal navegan al presionar), la página nueva no debe recibir el «soltar» y saltarse otra.
+    let presionDentro = false;
     const soltarTodo = (): void => {
       for (const el of presionados) el.classList.remove(estilos.presionado ?? '');
       presionados.clear();
     };
+    const botonEn = (objetivo: EventTarget | Element | null): HTMLElement | null => {
+      const boton = objetivo instanceof Element ? objetivo.closest<HTMLElement>(SELECTOR_BOTON) : null;
+      return boton && raiz.contains(boton) && !boton.classList.contains(OCULTO) ? boton : null;
+    };
     const alPresionar = (evento: PointerEvent): void => {
-      const boton = (evento.target as Element | null)?.closest(SELECTOR_BOTON);
-      if (!boton || !raiz.contains(boton)) return;
+      presionDentro = true;
+      const boton = botonEn(evento.target);
+      if (!boton) return;
       boton.classList.add(estilos.presionado ?? '');
       presionados.add(boton);
+      ejecutar(interpretarAcciones(boton.getAttribute('data-clickactions')), boton);
+      avisarFicha();
     };
-    const alClic = (evento: MouseEvent): void => {
-      const boton = (evento.target as Element | null)?.closest<HTMLElement>(SELECTOR_BOTON);
-      if (!boton || !raiz.contains(boton)) return;
+    const alSoltar = (evento: PointerEvent): void => {
+      soltarTodo();
+      if (!presionDentro) return;
+      presionDentro = false;
+      // Con touch, pointerup llega al elemento donde empezó el toque: se busca lo que hay debajo AHORA.
+      const boton = botonEn(document.elementFromPoint(evento.clientX, evento.clientY));
+      if (!boton) return;
       ejecutar(
-        [
-          ...interpretarAcciones(boton.getAttribute('data-clickactions')),
-          ...interpretarAcciones(boton.getAttribute('data-releaseactions')),
-          ...interpretarAcciones(boton.getAttribute('data-animationonselfclickactions')),
-        ],
+        [...interpretarAcciones(boton.getAttribute('data-releaseactions')), ...interpretarAcciones(boton.getAttribute('data-animationonselfclickactions'))],
         boton,
       );
       avisarFicha();
     };
     raiz.addEventListener('pointerdown', alPresionar);
-    raiz.addEventListener('click', alClic);
-    window.addEventListener('pointerup', soltarTodo);
-    window.addEventListener('pointercancel', soltarTodo);
+    window.addEventListener('pointerup', alSoltar);
+    const cancelar = (): void => {
+      presionDentro = false;
+      soltarTodo();
+    };
+    window.addEventListener('pointercancel', cancelar);
 
     return () => {
       for (const id of temporizadores) window.clearTimeout(id);
       raiz.removeEventListener('pointerdown', alPresionar);
-      raiz.removeEventListener('click', alClic);
-      window.removeEventListener('pointerup', soltarTodo);
-      window.removeEventListener('pointercancel', soltarTodo);
+      window.removeEventListener('pointerup', alSoltar);
+      window.removeEventListener('pointercancel', cancelar);
       // Sin esto los buffers del video se acumulan en sesiones largas (misma regla que VideoBucle).
       for (const video of videos) {
         video.pause();

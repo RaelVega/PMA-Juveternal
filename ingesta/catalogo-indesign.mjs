@@ -65,7 +65,7 @@ function acotarCss(css, reescribirUrl, id) {
   return salida;
 }
 
-export async function ingerirCatalogo({ id, exportDir, RAIZ, fuentes, sustitutas = {} }) {
+export async function ingerirCatalogo({ id, exportDir, RAIZ, fuentes, sustitutas = {}, mover = [], noMostrarAlCargar = [], corregirAcciones = [], imagenInicio = null, insertarLogo = null }) {
   const recursos = resolverNfc(exportDir, 'publication-web-resources');
   const dirHtml = path.join(recursos, 'html');
   const salida = path.join(RAIZ, 'contenido', 'catalogos', id);
@@ -80,6 +80,27 @@ export async function ingerirCatalogo({ id, exportDir, RAIZ, fuentes, sustitutas
   // publication.html es la portada; luego publication-1 … publication-N.
   const numeradas = readdirSync(dirHtml).map((n) => /^publication-(\d+)\.html$/.exec(n)).filter(Boolean).map((m) => Number(m[1])).sort((a, b) => a - b);
   const paginas = ['publication.html', ...numeradas.map((n) => `publication-${n}.html`)];
+  // Páginas que marketing dejó fuera de su sitio: se mueven detrás de la indicada (equivalencias.json).
+  for (const { pagina, despuesDe } of mover) {
+    const desde = paginas.indexOf(pagina);
+    if (desde === -1 || !paginas.includes(despuesDe)) throw new Error(`${id}: no existe ${pagina} o ${despuesDe} para reordenar`);
+    paginas.splice(desde, 1);
+    paginas.splice(paginas.indexOf(despuesDe) + 1, 0, pagina);
+  }
+  const numeroDe = (archivo) => (archivo === 'publication.html' ? 0 : Number(/publication-(\d+)\.html/.exec(archivo)?.[1]));
+  const indiceNuevo = new Map(paginas.map((archivo, i) => [numeroDe(archivo), i]));
+  const nombreDe = (i) => (i === 0 ? 'publication.html' : `publication-${i}.html`);
+  /**
+   * Con páginas movidas, los destinos de «ir a» se reescriben al orden nuevo: las flechas del diseño
+   * apuntan a la página contigua del orden original, y deben ir a la contigua del orden nuevo; el
+   * resto (inicio → portada) va a donde quedó su página. Sin mover nada, todo queda igual.
+   */
+  const reescribirDestinos = (html, origen, i) =>
+    html.replace(/goToDestination\('(publication(?:-\d+)?\.html)'\)/g, (_, destino) => {
+      const delta = numeroDe(destino) - numeroDe(origen);
+      const nuevo = delta === 1 || delta === -1 ? i + delta : indiceNuevo.get(numeroDe(destino));
+      return `goToDestination('${nombreDe(nuevo)}')`;
+    });
 
   const navegador = await chromium.launch({ channel: 'chrome' });
   // El export pide ../../font/*.ttf, que no vino: se sirve nuestra Montserrat para que la referencia salga con su letra.
@@ -130,6 +151,8 @@ export async function ingerirCatalogo({ id, exportDir, RAIZ, fuentes, sustitutas
     await ref.goto(url, { waitUntil: 'load' });
     await Promise.race([ref.evaluate(() => document.fonts.ready), ref.waitForTimeout(3000)]);
     await ref.waitForTimeout(3500);
+    // La referencia con las mismas correcciones que la app.
+    for (const { pagina: p, elemento } of noMostrarAlCargar) if (p === archivo) await ref.evaluate((e) => document.getElementById(e)?.classList.add('_idGenStateHide'), elemento);
     await ref.screenshot({ path: path.join(dirRef, `pagina-${numero}.png`) });
     await ref.close();
     const tRef = Date.now() - t0;
@@ -190,7 +213,34 @@ export async function ingerirCatalogo({ id, exportDir, RAIZ, fuentes, sustitutas
       videosPagina.push(`catalogos/${id}/video/${nombre}`);
     }
     const nombrePagina = `pagina-${numero}.html`;
-    writeFileSync(path.join(dirPaginas, nombrePagina), html.trim() + '\n');
+    // Botón de inicio (la casa): va al selector de empresa, no a la portada del catálogo → goToDestination('inicio').
+    if (imagenInicio) {
+      const marcaImagen = `img/${slug(imagenInicio)}`;
+      html = html.replace(/<div id="_idContainer\d+" class="_idGenButton[^"]*"[^>]*>[\s\S]*?(?=<div id="_idContainer\d+" class="_idGenButton|$)/g, (bloque) => {
+        const [cabecera] = bloque.match(/^<div[^>]*>/) ?? [''];
+        if (!bloque.includes(marcaImagen) || !cabecera.includes("goToDestination('publication.html')")) return bloque;
+        return cabecera.replaceAll("goToDestination('publication.html')", "goToDestination('inicio')") + bloque.slice(cabecera.length);
+      });
+    }
+    if (insertarLogo && insertarLogo.pagina === archivo) {
+      const alto = Math.round((insertarLogo.ancho * insertarLogo.recorte[3]) / insertarLogo.recorte[2]);
+      html += `\n<div class="logo-insertado" style="position:absolute;left:${insertarLogo.x}px;top:${insertarLogo.y}px;width:${insertarLogo.ancho}px;height:${alto}px"><img src="contenido/catalogos/${id}/img/logo-${id}.webp" alt="" style="display:block;width:100%;height:100%"></div>`;
+    }
+    // Correcciones del export: acciones mal copiadas en un botón (solo en ese botón).
+    for (const { pagina: p, elemento, de, a } of corregirAcciones) {
+      if (p !== archivo) continue;
+      const antes = html;
+      html = html.replace(new RegExp(`<div id="${elemento}"[^>]*>`), (cabecera) => cabecera.replaceAll(de, a));
+      if (html === antes) throw new Error(`${id}: no encuentro «${de}» en ${elemento} de ${archivo}`);
+    }
+    // Correcciones del export: sin la acción que muestra el elemento al cargar (sigue oculto hasta que un botón lo abra).
+    for (const { pagina: p, elemento } of noMostrarAlCargar) {
+      if (p !== archivo) continue;
+      const antes = html;
+      html = html.replace(new RegExp(`(<div id="${elemento}"[^>]*?) data-animationonpageloadactions="[^"]*"`), '$1');
+      if (html === antes) throw new Error(`${id}: no encuentro la animación de carga de ${elemento} en ${archivo}`);
+    }
+    writeFileSync(path.join(dirPaginas, nombrePagina), reescribirDestinos(html, archivo, indicePagina).trim() + '\n');
     indice.push({ archivo: `catalogos/${id}/paginas/${nombrePagina}`, origen: archivo, imagenes: imagenesPagina, videos: videosPagina });
     console.log(`  ${id} ${numero} ${archivo.padEnd(22)} ${imagenesPagina.length} img${videosPagina.length ? ` · ${videosPagina.length} video` : ''} · ${((Date.now() - t0) / 1000).toFixed(1)} s (referencia ${(tRef / 1000).toFixed(1)} s)`);
   }
@@ -198,6 +248,36 @@ export async function ingerirCatalogo({ id, exportDir, RAIZ, fuentes, sustitutas
 
   const desconocidas = [...accionesVistas].filter((a) => !ACCIONES_CONOCIDAS.has(a) && a !== 'selfContainerID');
   if (desconocidas.length) throw new Error(`Acciones de InDesign sin interpretar: ${desconocidas.join(', ')}. Hay que añadirlas en src/marca/catalogo/acciones.ts`);
+
+  // Logo recortado de una imagen del export (viene dentro de un fondo): el fondo casi blanco se vuelve transparente.
+  if (insertarLogo) {
+    const [rx, ry, rw, rh] = insertarLogo.recorte;
+    const { data, info } = await sharp(resolverNfc(path.join(recursos, 'image'), insertarLogo.desde)).resize(1080, 1920, { fit: 'fill' }).extract({ left: rx, top: ry, width: rw, height: rh }).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+    // Color del logo: el píxel más oscuro; fondo: la media del borde del recorte. Cada píxel = mezcla de los dos → alfa.
+    let oscuro = [255, 255, 255];
+    const claro = [0, 0, 0];
+    let bordes = 0;
+    for (let y = 0; y < info.height; y++) {
+      for (let x = 0; x < info.width; x++) {
+        const i = (y * info.width + x) * 3;
+        if (data[i] + data[i + 1] + data[i + 2] < oscuro[0] + oscuro[1] + oscuro[2]) oscuro = [data[i], data[i + 1], data[i + 2]];
+        if (x === 0 || y === 0 || x === info.width - 1 || y === info.height - 1) {
+          for (let c = 0; c < 3; c++) claro[c] += data[i + c];
+          bordes++;
+        }
+      }
+    }
+    for (let c = 0; c < 3; c++) claro[c] /= bordes;
+    const rgba = Buffer.alloc(info.width * info.height * 4);
+    for (let i = 0, j = 0; i < data.length; i += 3, j += 4) {
+      let alfa = 0;
+      for (let c = 0; c < 3; c++) alfa = Math.max(alfa, (claro[c] - data[i + c]) / Math.max(1, claro[c] - oscuro[c]));
+      // Restos del fondo (casi transparentes) fuera, y el resto reescalado.
+      alfa = Math.min(1, Math.max(0, (alfa - 0.06) / 0.94));
+      rgba[j] = oscuro[0]; rgba[j + 1] = oscuro[1]; rgba[j + 2] = oscuro[2]; rgba[j + 3] = Math.round(alfa * 255);
+    }
+    await sharp(rgba, { raw: { width: info.width, height: info.height, channels: 4 } }).resize(insertarLogo.ancho).webp({ quality: 90, alphaQuality: 95 }).toFile(path.join(dirImg, `logo-${id}.webp`));
+  }
 
   // CSS: acotado, con las imágenes de fondo convertidas y nuestras fuentes.
   const cssOrigen = readFileSync(path.join(recursos, 'css', 'idGeneratedStyles.css'), 'utf8');

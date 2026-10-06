@@ -76,8 +76,8 @@ for (const [id, relativa] of Object.entries(equivalencias.referencias)) {
 console.log('Catálogos');
 const catalogos = {};
 const fuentes = { montserrat: equivalencias.fuentes.montserrat.archivo };
-for (const { id, export: exportRel } of equivalencias.catalogos) {
-  await ingerirCatalogo({ id, exportDir: enEspejo(exportRel), RAIZ, fuentes, sustitutas: Object.fromEntries(Object.entries(equivalencias.sustitutas ?? {}).filter(([k]) => !k.startsWith('_'))) });
+for (const { id, export: exportRel, mover, noMostrarAlCargar, corregirAcciones, imagenInicio, insertarLogo } of equivalencias.catalogos) {
+  await ingerirCatalogo({ id, exportDir: enEspejo(exportRel), RAIZ, fuentes, mover, noMostrarAlCargar, corregirAcciones, imagenInicio, insertarLogo, sustitutas: Object.fromEntries(Object.entries(equivalencias.sustitutas ?? {}).filter(([k]) => !k.startsWith('_'))) });
   catalogos[id] = { archivo: `catalogos/${id}/catalogo.json` };
 }
 

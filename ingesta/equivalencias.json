@@ -26,11 +26,56 @@
   "catalogos": [
     {
       "id": "anahuac",
-      "export": "anahuac/CATALOGO PANTALLA TOUCH"
+      "export": "anahuac/CATALOGO PANTALLA TOUCH",
+      "_imagenInicio": "Imagen del botón de inicio (la casa). Esos botones van al selector de empresa, no a la portada del catálogo (Rael, 06-10).",
+      "imagenInicio": "icono_home"
     },
     {
       "id": "juveternal",
-      "export": "juveternal/CATÁLOGO JUVETERNAL 2026"
+      "export": "juveternal/CATÁLOGO JUVETERNAL 2026",
+      "_mover": "Marketing dejó Melatonina y Shilajit al final del export; van detrás del Magnesio (págs. 13 y 14 contando la portada como 1, como en el PDF de referencia). Rael, 06-10.",
+      "mover": [
+        {
+          "pagina": "publication-26.html",
+          "despuesDe": "publication-11.html"
+        },
+        {
+          "pagina": "publication-27.html",
+          "despuesDe": "publication-26.html"
+        }
+      ],
+      "_noMostrarAlCargar": "Errores del export: elementos que InDesign muestra solos al cargar y no deberían. Glow (publication-17): la ficha de Vitamina E se abría sola, sin ✕, y tapaba los dos «VER MÁS» (Rael, 06-10; en el PDF de referencia esa página solo muestra los «VER MÁS»).",
+      "noMostrarAlCargar": [
+        {
+          "pagina": "publication-17.html",
+          "elemento": "_idContainer285"
+        }
+      ],
+      "_imagenInicio": "Imagen del botón de inicio (la casa). Esos botones van al selector de empresa, no a la portada del catálogo (Rael, 06-10).",
+      "imagenInicio": "Recurso_6",
+      "_insertarLogo": "Logo en la contraportada, antes de los leads (Rael, 06-10). No hay pieza suelta: se recorta de la portada (viene dentro de su fondo) y se le quita el fondo blanco.",
+      "insertarLogo": {
+        "desde": "Mesa_de_trabajo_28.jpg",
+        "recorte": [
+          40,
+          90,
+          950,
+          160
+        ],
+        "pagina": "publication-28.html",
+        "x": 190,
+        "y": 70,
+        "ancho": 700
+      },
+      "_corregirAcciones": "Acciones mal copiadas en el export. Glow (publication-17): el primer «VER MÁS» (279) abre la ficha de Vitamina E (285) pero anima la de Hidrolizado de perla (283), así que salían las dos encimadas; la animación pasa a la 285 (06-10).",
+      "corregirAcciones": [
+        {
+          "pagina": "publication-17.html",
+          "elemento": "_idContainer279",
+          "de": "playAnimation('_idContainer283','_idGenPlayAnimation-98'",
+          "a": "playAnimation('_idContainer285','_idGenPlayAnimation-98'"
+        }
+      ]
     }
   ],
   "fuentes": {

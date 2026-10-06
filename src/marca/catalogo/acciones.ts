@@ -8,6 +8,8 @@ export type Accion =
   | { readonly tipo: 'mostrar'; readonly id: string }
   | { readonly tipo: 'ocultar'; readonly id: string }
   | { readonly tipo: 'irA'; readonly pagina: number }
+  /** Botón de inicio (la casa): al selector de empresa. La ingesta lo marca como goToDestination('inicio'). */
+  | { readonly tipo: 'inicio' }
   | { readonly tipo: 'animar'; readonly id: string | null; readonly clase: string; readonly retrasoS: number; readonly ocultarAlTerminar: boolean }
   | { readonly tipo: 'reproducir'; readonly id: string | null; readonly desdeS: number; readonly retrasoS: number };
 
@@ -46,6 +48,10 @@ export function interpretarAcciones(texto: string | null): Accion[] {
         if (texto0) acciones.push({ tipo: 'ocultar', id: texto0 });
         break;
       case 'goToDestination': {
+        if (texto0 === 'inicio') {
+          acciones.push({ tipo: 'inicio' });
+          break;
+        }
         const pagina = texto0 ? paginaDeDestino(texto0) : null;
         if (pagina !== null) acciones.push({ tipo: 'irA', pagina });
         break;

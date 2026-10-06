@@ -181,6 +181,34 @@
     },
     {
       "archivo": "catalogos/juveternal/paginas/pagina-12.html",
+      "origen": "publication-26.html",
+      "imagenes": [
+        "catalogos/juveternal/img/mesa-de-trabajo-26-1080x1920.webp",
+        "catalogos/juveternal/img/recurso-3-8-149x149.webp",
+        "catalogos/juveternal/img/recurso-6-8-187x188.webp",
+        "catalogos/juveternal/img/recurso-1-8-149x149.webp",
+        "catalogos/juveternal/img/recurso-16-81-644x1237.webp",
+        "catalogos/juveternal/img/recurso-5-81-262x77.webp",
+        "catalogos/juveternal/img/recurso-2-8-189x189.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/juveternal/paginas/pagina-13.html",
+      "origen": "publication-27.html",
+      "imagenes": [
+        "catalogos/juveternal/img/mesa-de-trabajo-27-1080x1920.webp",
+        "catalogos/juveternal/img/recurso-17-81-644x1237.webp",
+        "catalogos/juveternal/img/recurso-3-8-149x149.webp",
+        "catalogos/juveternal/img/recurso-6-8-187x188.webp",
+        "catalogos/juveternal/img/recurso-1-8-149x149.webp",
+        "catalogos/juveternal/img/recurso-5-81-262x77.webp",
+        "catalogos/juveternal/img/recurso-2-8-189x189.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/juveternal/paginas/pagina-14.html",
       "origen": "publication-12.html",
       "imagenes": [
         "catalogos/juveternal/img/recurso-25-81-1080x1920.webp",
@@ -194,7 +222,7 @@
       "videos": []
     },
     {
-      "archivo": "catalogos/juveternal/paginas/pagina-13.html",
+      "archivo": "catalogos/juveternal/paginas/pagina-15.html",
       "origen": "publication-13.html",
       "imagenes": [
         "catalogos/juveternal/img/recurso-24-81-1077x1914.webp",
@@ -208,7 +236,7 @@
       "videos": []
     },
     {
-      "archivo": "catalogos/juveternal/paginas/pagina-14.html",
+      "archivo": "catalogos/juveternal/paginas/pagina-16.html",
       "origen": "publication-14.html",
       "imagenes": [
         "catalogos/juveternal/img/recurso-23-81-1080x1920.webp",
@@ -222,7 +250,7 @@
       "videos": []
     },
     {
-      "archivo": "catalogos/juveternal/paginas/pagina-15.html",
+      "archivo": "catalogos/juveternal/paginas/pagina-17.html",
       "origen": "publication-15.html",
       "imagenes": [
         "catalogos/juveternal/img/mesa-de-trabajo-15-1080x1920.webp",
@@ -238,7 +266,7 @@
       "videos": []
     },
     {
-      "archivo": "catalogos/juveternal/paginas/pagina-16.html",
+      "archivo": "catalogos/juveternal/paginas/pagina-18.html",
       "origen": "publication-16.html",
       "imagenes": [
         "catalogos/juveternal/img/mesa-de-trabajo-16-1080x1920.webp",
@@ -254,7 +282,7 @@
       "videos": []
     },
     {
-      "archivo": "catalogos/juveternal/paginas/pagina-17.html",
+      "archivo": "catalogos/juveternal/paginas/pagina-19.html",
       "origen": "publication-17.html",
       "imagenes": [
         "catalogos/juveternal/img/mesa-de-trabajo-17-1080x1920.webp",
@@ -269,7 +297,7 @@
       "videos": []
     },
     {
-      "archivo": "catalogos/juveternal/paginas/pagina-18.html",
+      "archivo": "catalogos/juveternal/paginas/pagina-20.html",
       "origen": "publication-18.html",
       "imagenes": [
         "catalogos/juveternal/img/mesa-de-trabajo-18-1080x1920.webp",
@@ -283,7 +311,7 @@
       "videos": []
     },
     {
-      "archivo": "catalogos/juveternal/paginas/pagina-19.html",
+      "archivo": "catalogos/juveternal/paginas/pagina-21.html",
       "origen": "publication-19.html",
       "imagenes": [
         "catalogos/juveternal/img/mesa-de-trabajo-19-1080x1920.webp",
@@ -297,7 +325,7 @@
       "videos": []
     },
     {
-      "archivo": "catalogos/juveternal/paginas/pagina-20.html",
+      "archivo": "catalogos/juveternal/paginas/pagina-22.html",
       "origen": "publication-20.html",
       "imagenes": [
         "catalogos/juveternal/img/mesa-de-trabajo-20-1080x1920.webp",
@@ -313,7 +341,7 @@
       "videos": []
     },
     {
-      "archivo": "catalogos/juveternal/paginas/pagina-21.html",
+      "archivo": "catalogos/juveternal/paginas/pagina-23.html",
       "origen": "publication-21.html",
       "imagenes": [
         "catalogos/juveternal/img/mesa-de-trabajo-21-1080x1920.webp",
@@ -328,7 +356,7 @@
       "videos": []
     },
     {
-      "archivo": "catalogos/juveternal/paginas/pagina-22.html",
+      "archivo": "catalogos/juveternal/paginas/pagina-24.html",
       "origen": "publication-22.html",
       "imagenes": [
         "catalogos/juveternal/img/mesa-de-trabajo-22-1080x1920.webp",
@@ -343,7 +371,7 @@
       "videos": []
     },
     {
-      "archivo": "catalogos/juveternal/paginas/pagina-23.html",
+      "archivo": "catalogos/juveternal/paginas/pagina-25.html",
       "origen": "publication-23.html",
       "imagenes": [
         "catalogos/juveternal/img/mesa-de-trabajo-23-1080x1920.webp",
@@ -357,7 +385,7 @@
       "videos": []
     },
     {
-      "archivo": "catalogos/juveternal/paginas/pagina-24.html",
+      "archivo": "catalogos/juveternal/paginas/pagina-26.html",
       "origen": "publication-24.html",
       "imagenes": [
         "catalogos/juveternal/img/mesa-de-trabajo-24-1080x1920.webp",
@@ -372,40 +400,12 @@
       "videos": []
     },
     {
-      "archivo": "catalogos/juveternal/paginas/pagina-25.html",
+      "archivo": "catalogos/juveternal/paginas/pagina-27.html",
       "origen": "publication-25.html",
       "imagenes": [
         "catalogos/juveternal/img/mesa-de-trabajo-25-1080x1920.webp",
         "catalogos/juveternal/img/recurso-32-8-644x1237.webp",
         "catalogos/juveternal/img/recurso-31-8-644x1237.webp",
-        "catalogos/juveternal/img/recurso-3-8-149x149.webp",
-        "catalogos/juveternal/img/recurso-6-8-187x188.webp",
-        "catalogos/juveternal/img/recurso-1-8-149x149.webp",
-        "catalogos/juveternal/img/recurso-5-81-262x77.webp",
-        "catalogos/juveternal/img/recurso-2-8-189x189.webp"
-      ],
-      "videos": []
-    },
-    {
-      "archivo": "catalogos/juveternal/paginas/pagina-26.html",
-      "origen": "publication-26.html",
-      "imagenes": [
-        "catalogos/juveternal/img/mesa-de-trabajo-26-1080x1920.webp",
-        "catalogos/juveternal/img/recurso-3-8-149x149.webp",
-        "catalogos/juveternal/img/recurso-6-8-187x188.webp",
-        "catalogos/juveternal/img/recurso-1-8-149x149.webp",
-        "catalogos/juveternal/img/recurso-16-81-644x1237.webp",
-        "catalogos/juveternal/img/recurso-5-81-262x77.webp",
-        "catalogos/juveternal/img/recurso-2-8-189x189.webp"
-      ],
-      "videos": []
-    },
-    {
-      "archivo": "catalogos/juveternal/paginas/pagina-27.html",
-      "origen": "publication-27.html",
-      "imagenes": [
-        "catalogos/juveternal/img/mesa-de-trabajo-27-1080x1920.webp",
-        "catalogos/juveternal/img/recurso-17-81-644x1237.webp",
         "catalogos/juveternal/img/recurso-3-8-149x149.webp",
         "catalogos/juveternal/img/recurso-6-8-187x188.webp",
         "catalogos/juveternal/img/recurso-1-8-149x149.webp",

@@ -31,6 +31,8 @@ function copiarContenido(): Plugin {
       const origen = resolve(RAIZ, 'contenido');
       const destino = resolve(RAIZ, 'dist/contenido');
       if (existsSync(origen)) cpSync(origen, destino, { recursive: true });
+      // Cabeceras para Cloudflare Pages (noindex, sin caché). GitHub Pages no las lee: ahí van como <meta>.
+      cpSync(resolve(RAIZ, 'cascaras/web/_headers'), resolve(RAIZ, 'dist/_headers'));
     },
   };
 }

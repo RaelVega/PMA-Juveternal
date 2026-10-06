@@ -68,7 +68,7 @@ export function Catalogo(): ReactNode {
     <div className={estilos.catalogo} style={marca ? ({ '--color-flecha': marca.color } as CSSProperties) : undefined}>
       <AnimatePresence mode="popLayout" initial={false} custom={direccion}>
         <motion.div key={pagina} className={estilos.capa} custom={direccion} variants={variantes(reducido)} initial="entra" animate="visible" exit="sale">
-          <PaginaInDesign html={actual.html} catalogo={catalogo?.id ?? ''} alIrA={irA} alCambiarFicha={setFichaAbierta} />
+          <PaginaInDesign html={actual.html} catalogo={catalogo?.id ?? ''} alIrA={irA} alInicio={() => despachar({ tipo: 'retroceder' })} alCambiarFicha={setFichaAbierta} />
         </motion.div>
       </AnimatePresence>
       <AnimatePresence>
