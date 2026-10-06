@@ -5,50 +5,19 @@
   background: var(--naranja-anahuac);
 }
 
-.fondo {
+/* El video viene a 720×1260 (algo más ancho que 9:16): cubre el lienzo recortando unos píxeles de los lados. */
+.video {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.pieza {
+.toque {
   position: absolute;
-  pointer-events: none;
-}
-
-.pieza img {
-  display: block;
-}
-
-/* Zona táctil de cada marca: transparente, encima de sus piezas. */
-.zona {
-  position: absolute;
+  inset: 0;
   padding: 0;
   border: 0;
   background: transparent;
-  touch-action: manipulation;
-}
-
-.franjaBrillo {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-/* El carril se mueve (Motion escribe su transform); el reflejo va inclinado dentro. */
-.carrilBrillo {
-  position: absolute;
-  top: -20%;
-  left: 0;
-  width: 220px;
-  height: 140%;
-}
-
-/* Reflejo diagonal que cruza el título: un degradado, sin imagen. */
-.brillo {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(100deg, transparent 0%, rgb(255 255 255 / 0.35) 50%, transparent 100%);
-  transform: skewX(-18deg);
 }

@@ -9,7 +9,10 @@ const teclado = v.object({ filas: v.array(v.array(texto)), borrar: texto, espaci
 
 export const esquemaContenido = v.object({
   version: v.number(),
-  portada: v.object({
+  /** Salvapantallas: el video en bucle (id de manifiesto.videos). */
+  portada: v.object({ video: texto }),
+  /** Selector de marca, con las piezas del diseño de marketing. */
+  selector: v.object({
     fondo: pieza,
     bandaSuperior: pieza,
     bandaInferior: pieza,
@@ -50,7 +53,7 @@ export const esquemaContenido = v.object({
   exportacion: v.object({ hecha: texto, destinoEjecutable: texto, destinoNavegador: texto, fallo: texto, falloDetalle: texto }),
 });
 export type Contenido = v.InferOutput<typeof esquemaContenido>;
-export type MarcaPortada = Contenido['portada']['marcas'][number];
+export type MarcaSelector = Contenido['selector']['marcas'][number];
 export type Pieza = v.InferOutput<typeof pieza>;
 
 export const esquemaManifiesto = v.object({
@@ -75,9 +78,10 @@ export type IndiceCatalogo = v.InferOutput<typeof esquemaCatalogo>;
 /** Comprobaciones que el esquema no expresa: cada imagen y catálogo citado existe en el manifiesto. */
 export function validarReferencias(contenido: Contenido, manifiesto: Manifiesto): string[] {
   const problemas: string[] = [];
-  const { portada } = contenido;
-  const piezas = [portada.fondo, portada.bandaSuperior, portada.bandaInferior, portada.titulo, ...portada.marcas.flatMap((m) => [m.logo, m.click, m.mano])];
+  const { selector } = contenido;
+  const piezas = [selector.fondo, selector.bandaSuperior, selector.bandaInferior, selector.titulo, ...selector.marcas.flatMap((m) => [m.logo, m.click, m.mano])];
+  if (!manifiesto.videos[contenido.portada.video]) problemas.push(`el video «${contenido.portada.video}» no está en el manifiesto`);
   for (const p of piezas) if (!manifiesto.imagenes[p.imagen]) problemas.push(`la imagen «${p.imagen}» no está en el manifiesto`);
-  for (const m of portada.marcas) if (m.catalogo && !manifiesto.catalogos[m.catalogo]) problemas.push(`el catálogo «${m.catalogo}» de ${m.id} no está en el manifiesto`);
+  for (const m of selector.marcas) if (m.catalogo && !manifiesto.catalogos[m.catalogo]) problemas.push(`el catálogo «${m.catalogo}» de ${m.id} no está en el manifiesto`);
   return problemas;
 }

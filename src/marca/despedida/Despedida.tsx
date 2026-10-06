@@ -31,7 +31,7 @@ function Logo({ imagen, x, y, retraso }: { imagen: string; x: number; y: number;
  * salvapantallas tras unos segundos (la barra los cuenta) o al tocar.
  */
 export function Despedida(): ReactNode {
-  const { despedida, portada } = useContenido();
+  const { despedida, selector } = useContenido();
   const imagenes = useImagenesEscena();
   const despachar = useDespachar();
 
@@ -49,7 +49,7 @@ export function Despedida(): ReactNode {
       >
         {despedida.texto}
       </motion.p>
-      {portada.marcas.map((marca, i) => (
+      {selector.marcas.map((marca, i) => (
         <Logo key={marca.id} imagen={marca.logo.imagen} x={marca.logo.x} y={marca.logo.y} retraso={1.1 + i * 0.15} />
       ))}
       <div className={estilos.pista}>

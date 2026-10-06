@@ -1,5 +1,5 @@
 // Recorrido completo en Chrome a 1080×1920, como un visitante, contra `npm run preview` (4183):
-// salvapantallas (entrada y bucle) → Juveternal (aún sin catálogo) → Anáhuac → todas las páginas,
+// video del salvapantallas → selector (entrada y bucle) → Juveternal (aún sin catálogo) → Anáhuac → todas las páginas,
 // comparadas con su referencia de InDesign → una ficha abierta y cerrada → INICIO → anterior → salvapantallas.
 // Uso: node pruebas/visual/recorrido.mjs [url]   Resultados en pruebas/visual/resultados/
 import { mkdirSync, readFileSync, rmSync } from 'node:fs';
@@ -36,19 +36,30 @@ const paso = () => pagina.getAttribute('[data-paso]:not([style*="opacity: 0"])',
 const captura = (nombre) => pagina.screenshot({ path: path.join(SALIDA, `${nombre}.png`) });
 const flecha = (nombre) => pagina.getByRole('button', { name: nombre, exact: true });
 
+/** Del video del salvapantallas al selector de marca (un toque). */
+async function aSelector(p = pagina) {
+  await p.mouse.click(540, 960);
+  await p.waitForSelector('[data-paso="selector"]', { timeout: 5_000 });
+}
+
 await pagina.goto(URL);
 await pagina.waitForSelector('[data-paso="portada"]', { timeout: 15_000 });
+await pagina.waitForTimeout(2000);
+await captura('salvapantallas-video');
+const reproduce = await pagina.evaluate(() => { const v = document.querySelector('[data-paso="portada"] video'); return !!v && v.currentTime > 0.5 && !v.paused && v.muted; });
+comprobar(reproduce, 'el video del salvapantallas se reproduce (en silencio y en bucle)');
+await aSelector();
 await pagina.waitForTimeout(250);
 await captura('portada-entrando');
 await pagina.waitForTimeout(2300);
 await captura('portada');
-comprobar((await diferencia(path.join(SALIDA, 'portada.png'), path.join(REF, 'portada.png'))) < TOLERANCIA, 'salvapantallas igual a la composición de marketing');
+comprobar((await diferencia(path.join(SALIDA, 'portada.png'), path.join(REF, 'portada.png'))) < TOLERANCIA, 'selector igual a la composición de marketing');
 await pagina.waitForTimeout(2600);
 await captura('portada-bucle');
 
 await pagina.mouse.click(270, 1000);
 await pagina.waitForTimeout(400);
-comprobar((await paso()) === 'portada', 'Juveternal (sin catálogo aún) no sale del salvapantallas');
+comprobar((await paso()) === 'selector', 'Juveternal (sin catálogo aún) no sale del selector');
 
 await pagina.mouse.click(810, 1000);
 await pagina.waitForTimeout(600);
@@ -97,7 +108,7 @@ const enPortadaCatalogo = await pagina.evaluate(() => !!document.querySelector('
 comprobar(enPortadaCatalogo, 'INICIO lleva a la portada del catálogo');
 await flecha('Página anterior').click();
 await pagina.waitForTimeout(600);
-comprobar((await paso()) === 'portada', '«anterior» desde la portada del catálogo vuelve al salvapantallas');
+comprobar((await paso()) === 'selector', '«anterior» desde la portada del catálogo vuelve al selector');
 
 // Final del catálogo → leads → despedida → salvapantallas.
 await pagina.mouse.click(810, 1000);
@@ -127,9 +138,11 @@ await pagina.waitForTimeout(1600);
 comprobar((await paso()) === 'despedida', 'ENVIAR con nombre y correo lleva a la despedida');
 await captura('despedida');
 await pagina.waitForTimeout(9500);
-comprobar((await paso()) === 'portada', 'la despedida vuelve sola al salvapantallas');
+comprobar((await paso()) === 'portada', 'la despedida vuelve sola al video del salvapantallas');
 
 // OMITIR también lleva a la despedida.
+await aSelector();
+await pagina.waitForTimeout(500);
 await pagina.mouse.click(810, 1000);
 await pagina.waitForTimeout(600);
 for (let n = 1; n < total; n++) { await flecha('Página siguiente').click(); await pagina.waitForTimeout(90); }
@@ -141,9 +154,11 @@ await pagina.waitForTimeout(800);
 comprobar((await paso()) === 'despedida', 'OMITIR lleva a la despedida');
 await pagina.mouse.click(540, 1500);
 await pagina.waitForTimeout(800);
-comprobar((await paso()) === 'portada', 'un toque en la despedida vuelve al salvapantallas');
+comprobar((await paso()) === 'portada', 'un toque en la despedida vuelve al video del salvapantallas');
 
 // Página 6 de cerca: la sustituta de Speeday (Rubik Black Italic).
+await aSelector();
+await pagina.waitForTimeout(500);
 await pagina.mouse.click(810, 1000);
 await pagina.waitForTimeout(600);
 for (let n = 1; n <= 6; n++) { await flecha('Página siguiente').click(); await pagina.waitForTimeout(90); }
@@ -159,13 +174,14 @@ const espera = await navegador.newPage({ viewport: { width: 1080, height: 1920 }
 espera.on('pageerror', (e) => errores.push(e.message));
 await espera.goto(URL);
 await espera.waitForSelector('[data-paso="portada"]', { timeout: 15_000 });
+await aSelector(espera);
 await espera.waitForTimeout(2600);
 await espera.mouse.click(810, 1000);
 await espera.waitForTimeout(46_500);
 await espera.screenshot({ path: path.join(SALIDA, 'aviso-inactividad.png') });
 comprobar(await espera.getByText('Toca la pantalla para continuar').isVisible(), 'a los 45 s aparece el aviso de inactividad');
 await espera.waitForTimeout(10_000);
-comprobar((await espera.getAttribute('[data-paso]:not([style*="opacity: 0"])', 'data-paso').catch(() => '?')) === 'portada', 'a los 55 s vuelve al salvapantallas');
+comprobar((await espera.getAttribute('[data-paso]:not([style*="opacity: 0"])', 'data-paso').catch(() => '?')) === 'portada', 'a los 55 s vuelve al video del salvapantallas');
 await espera.close();
 const fallo = await navegador.newPage({ viewport: { width: 1080, height: 1920 } });
 await fallo.goto(`${URL}?fallo`);

@@ -13,6 +13,13 @@
     "mano-juveternal": "portada/FONDO FLUJO ANAHUAC-JUVETERNAL TOUCH/Recurso 9.png",
     "mano-anahuac": "portada/FONDO FLUJO ANAHUAC-JUVETERNAL TOUCH/Recurso 8.png"
   },
+  "videos": {
+    "_nota": "Videos de marketing → contenido/video/. Se pasan a H.264 8 bits sin audio, con faststart, y el bucle se cierra con un fundido: se quita el principio («fundido» s) y se funde con el final, así acaba en el fotograma anterior al primero (misma receta que el video de Biocaps, aprobada por Rael el 01-10).",
+    "salvapantallas": {
+      "origen": "portada/FONDO FLUJO ANAHUAC-JUVETERNAL TOUCH/SALVAPANTALLAS.mp4",
+      "fundido": 0.5
+    }
+  },
   "referencias": {
     "portada": "portada/fondo_anahuacjuveternal.png"
   },

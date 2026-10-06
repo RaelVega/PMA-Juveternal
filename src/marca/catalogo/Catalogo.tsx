@@ -59,7 +59,7 @@ export function Catalogo(): ReactNode {
   const actual = paginas[pagina];
   if (!actual) return null;
   const irA = (n: number): void => despachar({ tipo: 'elegir', valor: valorPagina(n) });
-  // Desde la portada del catálogo, «anterior» vuelve al salvapantallas (y la sesión se limpia).
+  // Desde la portada del catálogo, «anterior» vuelve al selector de marca.
   const retroceder = (): void => (pagina === 0 ? despachar({ tipo: 'retroceder' }) : irA(pagina - 1));
 
   return (

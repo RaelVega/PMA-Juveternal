@@ -2,12 +2,12 @@ import { crearMaquina, type DefinicionFlujo, type Maquina } from '../motor/maqui
 import { CAMPOS_LEAD, leadCompleto, type CampoLead } from './leads/campos';
 
 /**
- * Flujo de la pantalla dual: salvapantallas (elegir marca) → catálogo de esa
- * marca → leads (una sola pantalla para las dos marcas, al final de cualquier
+ * Flujo de la pantalla dual: salvapantallas (video; un toque) → selector de
+ * marca → catálogo de esa marca → leads (una sola pantalla para las dos marcas, al final de cualquier
  * catálogo) → despedida → salvapantallas. La página del catálogo y los datos
  * del lead son parte de la sesión: el reinicio los borra sin estado suelto.
  */
-export type PasoDual = 'portada' | 'catalogo' | 'leads' | 'despedida';
+export type PasoDual = 'portada' | 'selector' | 'catalogo' | 'leads' | 'despedida';
 
 export interface LeadSesion {
   readonly nombre: string;
@@ -40,11 +40,14 @@ export interface LimitesLead {
 export function crearMaquinaDual(paginasPorCatalogo: Readonly<Record<string, number>>, limites: LimitesLead): Maquina<PasoDual, SesionDual> {
   const totalDe = (s: SesionDual): number => (s.catalogo ? (paginasPorCatalogo[s.catalogo] ?? 0) : 0);
   const definicion: DefinicionFlujo<PasoDual, SesionDual> = {
-    orden: ['portada', 'catalogo', 'leads', 'despedida'],
+    orden: ['portada', 'selector', 'catalogo', 'leads', 'despedida'],
     sesionInicial: SESION_INICIAL,
     pasos: {
-      portada: {
-        tipo: 'portada',
+      // El video: cualquier toque avanza; ahí no cuenta la inactividad.
+      portada: { tipo: 'portada' },
+      // En el selector sí: si nadie elige marca, a los 55 s vuelve al video.
+      selector: {
+        tipo: 'eleccion',
         elegir: (s, valor) => ((paginasPorCatalogo[valor] ?? 0) > 0 ? { ...s, catalogo: valor, pagina: 0 } : null),
         puedeAvanzar: (s) => s.catalogo !== null,
       },

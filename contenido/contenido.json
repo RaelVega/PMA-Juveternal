@@ -7,8 +7,12 @@
     "Textos de leads, despedida, aviso de inactividad y fallo: redacción propia con la identidad del salvapantallas; marketing los revisa.",
     "leads.consentimiento: texto provisional. El aviso de privacidad (LFPDPPP) y su redacción los tiene que dar el cliente."
   ],
-  "_portada": "Posiciones (px del lienzo) medidas al píxel contra la composición final de marketing (assets-fuente/portada/fondo_anahuacjuveternal.png).",
+  "_portada": "Salvapantallas: el video de marketing en bucle (06-10). Un toque lleva al selector de marca.",
   "portada": {
+    "video": "salvapantallas"
+  },
+  "_selector": "Selector de marca. Posiciones (px del lienzo) medidas al píxel contra la composición final de marketing (assets-fuente/portada/fondo_anahuacjuveternal.png).",
+  "selector": {
     "fondo": {
       "imagen": "portada-fondo",
       "x": 0,

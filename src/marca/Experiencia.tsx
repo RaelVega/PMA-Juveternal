@@ -10,10 +10,11 @@ import { AVISO_INACTIVIDAD_MS, REINICIO_INACTIVIDAD_MS } from './configuracion';
 import { useDespachar, useFlujo } from './estado';
 import type { PasoDual } from './flujo';
 import { Portada } from './portada/Portada';
+import { Selector } from './selector/Selector';
 import { CURVA_ESTANDAR, DURACION } from './tokens/movimiento';
 import estilos from './Experiencia.module.css';
 
-const PANTALLAS: Record<PasoDual, () => ReactNode> = { portada: Portada, catalogo: Catalogo, leads: Leads, despedida: Despedida };
+const PANTALLAS: Record<PasoDual, () => ReactNode> = { portada: Portada, selector: Selector, catalogo: Catalogo, leads: Leads, despedida: Despedida };
 
 export function Experiencia(): ReactNode {
   const paso = useFlujo((f) => f.paso);

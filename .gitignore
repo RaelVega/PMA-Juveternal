@@ -12,3 +12,5 @@ node_modules/
 /datos-kiosco/
 /telemetria/
 pruebas/visual/resultados/
+# Datos personales (CSV de leads junto al .exe en desarrollo).
+/leads/

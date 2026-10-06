@@ -2,7 +2,8 @@
 //   npm run ingesta
 // Portada: cada pieza a WebP con su id (equivalencias.json). Catálogos: ver catalogo-indesign.mjs.
 // Escribe contenido/manifiesto.json (no se edita a mano) y las referencias de pruebas/visual/referencias/.
-import { mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import sharp from 'sharp';
 import { ingerirCatalogo } from './catalogo-indesign.mjs';
@@ -43,6 +44,31 @@ for (const [id, relativa] of Object.entries(equivalencias.portada)) {
   console.log(`  ${id.padEnd(18)} ${width}×${height} ${(size / 1024).toFixed(0).padStart(5)} KB`);
 }
 
+console.log('Videos');
+const videos = {};
+const DIR_VIDEO = path.join(RAIZ, 'contenido', 'video');
+mkdirSync(DIR_VIDEO, { recursive: true });
+for (const [id, { origen, fundido }] of Object.entries(equivalencias.videos ?? {})) {
+  if (id.startsWith('_')) continue;
+  const fuente = enEspejo(origen);
+  const archivo = `video/${id}.mp4`;
+  const destino = path.join(RAIZ, 'contenido', archivo);
+  // Solo se recodifica si el original es más nuevo (tarda): el resultado está versionado.
+  if (!existsSync(destino) || statSync(fuente).mtimeMs > statSync(destino).mtimeMs) {
+    const [fps, cuadros] = execFileSync('ffprobe', ['-v', 'error', '-count_frames', '-select_streams', 'v:0', '-show_entries', 'stream=r_frame_rate,nb_read_frames', '-of', 'csv=p=0', fuente], { encoding: 'utf8' }).trim().split(',');
+    const [num, den] = fps.split('/').map(Number);
+    const tasa = num / den;
+    const recorte = Math.round(fundido * tasa);
+    const desfase = ((Number(cuadros) - recorte) / tasa - fundido).toFixed(4);
+    execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', fuente,
+      '-filter_complex', `[0:v]split[a][b];[a]trim=start_frame=${recorte},setpts=PTS-STARTPTS[m];[b]trim=end_frame=${recorte},setpts=PTS-STARTPTS[h];[m][h]xfade=transition=fade:duration=${fundido}:offset=${desfase},format=yuv420p[v]`,
+      '-map', '[v]', '-an', '-c:v', 'libx264', '-preset', 'slow', '-crf', '20', '-profile:v', 'high', '-level', '4.2', '-g', String(Math.round(tasa)),
+      '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-movflags', '+faststart', '-map_metadata', '-1', destino]);
+  }
+  videos[id] = { archivo };
+  console.log(`  ${id.padEnd(18)} ${(statSync(destino).size / 1024 / 1024).toFixed(1)} MB`);
+}
+
 for (const [id, relativa] of Object.entries(equivalencias.referencias)) {
   await sharp(enEspejo(relativa)).png().toFile(path.join(DIR_REF, `${id}.png`));
 }
@@ -59,7 +85,7 @@ const manifiesto = {
   version: 1,
   generado: 'ingesta/ingerir.mjs — no editar a mano',
   imagenes,
-  videos: {},
+  videos,
   fuentes: Object.fromEntries(Object.entries(equivalencias.fuentes).filter(([k]) => !k.startsWith('_'))),
   catalogos,
 };

@@ -7,6 +7,7 @@ Pantalla dual PMA (Plantas Medicinales Anáhuac) × Juveternal. Vertical 1080×1
 | Pieza | Dónde | Estado |
 |---|---|---|
 | Portada / salvapantallas | `assets-fuente/portada/` | Composición final (`fondo_anahuacjuveternal.png`) y, desde el 05-10, sus 10 piezas por separado (`FONDO FLUJO ANAHUAC-JUVETERNAL TOUCH/`). Ya construida y animada |
+| Video del salvapantallas | `assets-fuente/portada/FONDO FLUJO…/SALVAPANTALLAS.mp4` | 06-10. H.264 720×1260, 39,8 s, con audio vacío. Va antes del selector de marca; convertido sin audio y con el bucle cerrado (49 → 12,6 MB) |
 | Catálogo Anáhuac | `assets-fuente/anahuac/CATALOGO PANTALLA TOUCH/` | Export HTML5 de diseño fijo de InDesign: portada + 24 páginas + contraportada, 1080×1920, con fichas, ✕ e inicio. **Convertido** (05-10): 94 MB de PNG → 5,2 MB de WebP; 25 de 26 páginas iguales a la referencia (la 0 difiere solo por el fotograma del video) |
 | Catálogo Juveternal | `assets-fuente/juveternal/PDF juveternal….pdf` | **Referencia**: 29 páginas de Illustrator (1,1 GB). Tiene inicio, ← → y «VER MÁS», pero faltan las fichas y el proyecto de InDesign. Miniaturas en `contexto/juveternal-miniaturas.jpg` |
 | Prototipo anterior | `~/Prototipos/kiosko-dual/` (fuera del proyecto, solo lectura) | Metía el catálogo en un `iframe` con Volver, Inicio y Continuar encima; además, dinámicas (dispensador, fórmula, trivia, memorama) y salvapantallas dual |

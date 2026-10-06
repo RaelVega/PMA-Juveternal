@@ -18,7 +18,7 @@ const AVANZAR: EventoFlujo = { tipo: 'avanzar', origen: 'visitante' };
 
 function almacenEnLeads(marca: string) {
   const almacen = crearAlmacenFlujo(crearMaquinaDual({ anahuac: 2, juveternal: 2 }, { maxCaracteres: { nombre: 40, correo: 60, empresa: 40 } }));
-  for (const e of [{ tipo: 'elegir', valor: marca }, AVANZAR, { tipo: 'elegir', valor: valorPagina(1) }, AVANZAR] as EventoFlujo[]) almacen.getState().despachar(e);
+  for (const e of [AVANZAR, { tipo: 'elegir', valor: marca }, AVANZAR, { tipo: 'elegir', valor: valorPagina(1) }, AVANZAR] as EventoFlujo[]) almacen.getState().despachar(e);
   expect(almacen.getState().flujo.paso).toBe('leads');
   return almacen;
 }

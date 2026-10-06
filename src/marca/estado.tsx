@@ -52,15 +52,15 @@ export function useImagen(id: string): ImagenResuelta {
   return { url: urlContenido(imagen.archivo), ancho: imagen.ancho, alto: imagen.alto };
 }
 
-/** Fondo y bandas del salvapantallas, para las pantallas que comparten su identidad (leads, despedida, aviso). */
+/** Fondo y bandas del selector (la identidad del salvapantallas), para las pantallas que comparten su identidad (leads, despedida, aviso). */
 export function useImagenesEscena(): ImagenesEscena {
-  const { portada } = useContenido();
-  const fondo = useImagen(portada.fondo.imagen);
-  const sup = useImagen(portada.bandaSuperior.imagen);
-  const inf = useImagen(portada.bandaInferior.imagen);
+  const { selector } = useContenido();
+  const fondo = useImagen(selector.fondo.imagen);
+  const sup = useImagen(selector.bandaSuperior.imagen);
+  const inf = useImagen(selector.bandaInferior.imagen);
   return {
     fondo: fondo.url,
-    bandaSuperior: { url: sup.url, x: portada.bandaSuperior.x, y: portada.bandaSuperior.y, ancho: sup.ancho, alto: sup.alto },
-    bandaInferior: { url: inf.url, x: portada.bandaInferior.x, y: portada.bandaInferior.y, ancho: inf.ancho, alto: inf.alto },
+    bandaSuperior: { url: sup.url, x: selector.bandaSuperior.x, y: selector.bandaSuperior.y, ancho: sup.ancho, alto: sup.alto },
+    bandaInferior: { url: inf.url, x: selector.bandaInferior.x, y: selector.bandaInferior.y, ancho: inf.ancho, alto: inf.alto },
   };
 }

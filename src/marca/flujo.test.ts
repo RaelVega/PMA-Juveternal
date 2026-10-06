@@ -8,18 +8,30 @@ const aplicar = (estado: Estado, ...eventos: EventoFlujo[]): Estado => eventos.r
 const AVANZAR: EventoFlujo = { tipo: 'avanzar', origen: 'visitante' };
 const elegir = (valor: string): EventoFlujo => ({ tipo: 'elegir', valor });
 const escribir = (campo: string, texto: string): EventoFlujo => ({ tipo: 'escribir', campo, texto });
-const enCatalogo = aplicar(maquina.inicial(), elegir('anahuac'), AVANZAR);
+const enSelector = aplicar(maquina.inicial(), AVANZAR);
+const enCatalogo = aplicar(enSelector, elegir('anahuac'), AVANZAR);
 const enLeads = aplicar(enCatalogo, elegir(valorPagina(25)), AVANZAR);
 
 describe('flujo de la pantalla dual', () => {
+  it('el video del salvapantallas avanza con cualquier toque al selector', () => {
+    expect(maquina.inicial().paso).toBe('portada');
+    expect(enSelector.paso).toBe('selector');
+  });
+
+  it('en el selector cuenta la inactividad y vuelve al video', () => {
+    const avisado = aplicar(enSelector, { tipo: 'avisarInactividad' });
+    expect(avisado.avisoInactividad).toBe(true);
+    expect(aplicar(avisado, { tipo: 'reiniciar', motivo: 'inactividad' })).toEqual(maquina.inicial());
+  });
+
   it('elegir Anáhuac abre su catálogo en la portada del catálogo', () => {
     expect(enCatalogo.paso).toBe('catalogo');
     expect(enCatalogo.sesion).toMatchObject({ catalogo: 'anahuac', pagina: 0 });
   });
 
   it('un catálogo que no existe no se puede elegir ni avanza', () => {
-    expect(maquina.transicion(maquina.inicial(), elegir('otra')).efecto).toBe('sinCambio');
-    expect(maquina.transicion(maquina.inicial(), AVANZAR).efecto).toBe('sinCambio');
+    expect(maquina.transicion(enSelector, elegir('otra')).efecto).toBe('sinCambio');
+    expect(maquina.transicion(enSelector, AVANZAR).efecto).toBe('sinCambio');
   });
 
   it('se navega entre páginas dentro del rango', () => {
@@ -30,7 +42,7 @@ describe('flujo de la pantalla dual', () => {
   it('a los leads solo se llega desde la última página, de cualquier catálogo', () => {
     expect(maquina.transicion(aplicar(enCatalogo, elegir(valorPagina(24))), AVANZAR).efecto).toBe('sinCambio');
     expect(enLeads.paso).toBe('leads');
-    const juveternal = aplicar(maquina.inicial(), elegir('juveternal'), AVANZAR, elegir(valorPagina(2)), AVANZAR);
+    const juveternal = aplicar(enSelector, elegir('juveternal'), AVANZAR, elegir(valorPagina(2)), AVANZAR);
     expect(juveternal.paso).toBe('leads');
     expect(juveternal.sesion.catalogo).toBe('juveternal');
   });
@@ -60,8 +72,8 @@ describe('flujo de la pantalla dual', () => {
     expect(aplicar(despedida, { tipo: 'reiniciar', motivo: 'fin' })).toEqual(maquina.inicial());
   });
 
-  it('retroceder desde el catálogo vuelve al salvapantallas con la sesión limpia', () => {
-    expect(aplicar(enCatalogo, elegir(valorPagina(3)), { tipo: 'retroceder' })).toEqual(maquina.inicial());
+  it('retroceder desde el catálogo vuelve al selector de marca', () => {
+    expect(aplicar(enCatalogo, elegir(valorPagina(3)), { tipo: 'retroceder' }).paso).toBe('selector');
   });
 
   it('la inactividad avisa y reinicia', () => {

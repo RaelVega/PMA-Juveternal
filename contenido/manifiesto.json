@@ -53,7 +53,11 @@
       "alto": 165
     }
   },
-  "videos": {},
+  "videos": {
+    "salvapantallas": {
+      "archivo": "video/salvapantallas.mp4"
+    }
+  },
   "fuentes": {
     "montserrat": {
       "archivo": "fuentes/Montserrat-Variable.ttf",
