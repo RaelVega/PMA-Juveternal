@@ -2,6 +2,10 @@ import * as v from 'valibot';
 
 const texto = v.pipe(v.string(), v.minLength(1));
 const pieza = v.object({ imagen: texto, x: v.number(), y: v.number() });
+/** Título en dos líneas, como «CONOCE NUESTROS / PRODUCTOS» del salvapantallas (la segunda en negrita). */
+const dosLineas = v.tuple([texto, texto]);
+const campoLead = v.object({ etiqueta: texto, maxCaracteres: v.pipe(v.number(), v.integer(), v.minValue(1)) });
+const teclado = v.object({ filas: v.array(v.array(texto)), borrar: texto, espacio: texto });
 
 export const esquemaContenido = v.object({
   version: v.number(),
@@ -27,8 +31,23 @@ export const esquemaContenido = v.object({
       v.length(2),
     ),
   }),
-  catalogo: v.object({ anterior: texto, siguiente: texto }),
-  aviso: v.object({ titulo: texto, texto }),
+  catalogo: v.object({ anterior: texto, siguiente: texto, finalizar: texto }),
+  aviso: v.object({ titulo: dosLineas, texto }),
+  leads: v.object({
+    titulo: dosLineas,
+    texto,
+    campos: v.object({ nombre: campoLead, correo: campoLead, empresa: campoLead }),
+    consentimiento: texto,
+    enviar: texto,
+    omitir: texto,
+    teclado,
+    tecladoCorreo: teclado,
+    dominios: v.array(texto),
+    terminaciones: v.array(texto),
+    maxSugerencias: v.pipe(v.number(), v.integer(), v.minValue(0)),
+  }),
+  despedida: v.object({ titulo: dosLineas, texto, segundos: v.pipe(v.number(), v.minValue(1)) }),
+  exportacion: v.object({ hecha: texto, destinoEjecutable: texto, destinoNavegador: texto, fallo: texto, falloDetalle: texto }),
 });
 export type Contenido = v.InferOutput<typeof esquemaContenido>;
 export type MarcaPortada = Contenido['portada']['marcas'][number];

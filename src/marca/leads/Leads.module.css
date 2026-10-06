@@ -1,0 +1,139 @@
+/* Bajo el título (que ocupa y 307–509): texto, campos, consentimiento, teclado y botones. */
+.formulario {
+  position: absolute;
+  top: 540px;
+  left: 0;
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+}
+
+.texto {
+  margin: 0 0 6px;
+  font-size: var(--cuerpo-texto);
+  font-variation-settings: 'wght' 600;
+  text-shadow: var(--sombra-texto);
+}
+
+/* Campos de vidrio con el borde claro de las pastillas de los logos. */
+.campo {
+  width: 900px;
+  height: 108px;
+  padding: 0 40px;
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  border-radius: var(--radio-pastilla);
+  background: var(--vidrio);
+  box-shadow: inset 0 0 0 2px var(--borde-vidrio);
+  color: var(--blanco);
+  text-align: left;
+}
+
+.campo[data-seleccionado] {
+  background: var(--vidrio-fuerte);
+  box-shadow: inset 0 0 0 4px var(--blanco), var(--sombra-control);
+}
+
+.etiqueta {
+  font-size: var(--cuerpo-detalle);
+  font-variation-settings: 'wght' 700;
+  letter-spacing: 0.06em;
+  opacity: 0.9;
+}
+
+.valor {
+  min-height: 1.2em;
+  font-family: var(--familia-interfaz);
+  font-size: var(--cuerpo-texto);
+  font-variation-settings: 'wght' 600;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Correo escrito pero aún no válido. */
+.incompleto .valor {
+  opacity: 0.75;
+}
+
+.cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.9em;
+  margin-left: 4px;
+  vertical-align: -0.1em;
+  background: currentcolor;
+  animation: parpadeo 1s steps(1) infinite;
+}
+
+@keyframes parpadeo {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Campo que rechaza una tecla o falta al enviar. */
+.rechazo {
+  animation: temblor 0.32s var(--curva-estandar);
+}
+
+@keyframes temblor {
+  20%,
+  60% {
+    transform: translateX(-10px);
+  }
+  40%,
+  80% {
+    transform: translateX(10px);
+  }
+}
+
+.consentimiento {
+  width: 900px;
+  margin: 0;
+  text-align: center;
+  font-size: var(--cuerpo-detalle);
+  font-variation-settings: 'wght' 500;
+  text-shadow: var(--sombra-texto);
+}
+
+.teclado {
+  margin-top: 6px;
+}
+
+.botones {
+  margin-top: 16px;
+  display: flex;
+  gap: 32px;
+}
+
+/* Pastillas como «click aquí»: OMITIR en vidrio, ENVIAR en el naranja de Anáhuac. */
+.boton {
+  width: 420px;
+  height: 104px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radio-pastilla);
+  font-family: var(--familia-titulo);
+  font-size: 40px;
+  font-variation-settings: 'wght' 800;
+  letter-spacing: 0.04em;
+  color: var(--blanco);
+}
+
+.omitir {
+  background: var(--vidrio);
+  box-shadow: inset 0 0 0 2px var(--borde-vidrio);
+}
+
+.enviar {
+  background: var(--naranja-anahuac);
+  box-shadow: inset 0 0 0 3px rgb(255 214 150 / 0.85), var(--sombra-control);
+  opacity: 0.6;
+}
+
+/* Con nombre y correo válidos, ENVIAR se enciende. */
+.enviar[data-seleccionado] {
+  opacity: 1;
+}

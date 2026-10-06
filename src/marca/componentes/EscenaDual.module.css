@@ -1,0 +1,74 @@
+.escena {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: var(--blanco);
+  font-family: var(--familia-titulo);
+}
+
+.fondo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Sin imágenes: el fondo partido en CSS, con el corte en la mitad como el del salvapantallas. */
+.fondoCss {
+  background: var(--fondo-dual-izquierda) left / 50% 100% no-repeat, var(--fondo-dual-derecha) right / 50% 100% no-repeat;
+}
+
+.banda {
+  position: absolute;
+  pointer-events: none;
+}
+
+.banda img {
+  display: block;
+}
+
+/* Bandas en CSS, con la forma de las del salvapantallas. */
+.bandaCss {
+  height: 101px;
+}
+
+.bandaCssSuperior {
+  width: 913px;
+  background: var(--banda-izquierda);
+}
+
+.bandaCssInferior {
+  width: 904px;
+  margin-left: 176px;
+  background: var(--banda-derecha);
+}
+
+/* El título ocupa la franja de las bandas, centrado, como «CONOCE NUESTROS / PRODUCTOS». */
+.titulo {
+  position: absolute;
+  top: 307px;
+  left: 0;
+  width: 100%;
+  height: 202px;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  place-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: var(--sombra-texto);
+  pointer-events: none;
+}
+
+.linea1 {
+  font-size: var(--cuerpo-titulo-1);
+  font-weight: var(--peso-titulo-1);
+  font-variation-settings: 'wght' 500;
+  letter-spacing: 0.01em;
+}
+
+.linea2 {
+  font-size: var(--cuerpo-titulo-2);
+  font-weight: var(--peso-titulo-2);
+  font-variation-settings: 'wght' 800;
+  line-height: 1;
+}

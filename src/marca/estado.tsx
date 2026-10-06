@@ -4,6 +4,7 @@ import { urlContenido } from '../motor/contenido/cargar';
 import type { AlmacenFlujo } from '../motor/maquina/almacen';
 import type { EstadoFlujo, EventoFlujo } from '../motor/maquina/maquina';
 import type { ContenidoCargado } from './contenido/cargar';
+import type { ImagenesEscena } from './componentes/EscenaDual';
 import type { Contenido } from './contenido/esquema';
 import type { PasoDual, SesionDual } from './flujo';
 
@@ -49,4 +50,17 @@ export function useImagen(id: string): ImagenResuelta {
   const imagen = useRecursos().manifiesto.imagenes[id];
   if (!imagen) throw new Error(`La imagen «${id}» no está en el manifiesto`);
   return { url: urlContenido(imagen.archivo), ancho: imagen.ancho, alto: imagen.alto };
+}
+
+/** Fondo y bandas del salvapantallas, para las pantallas que comparten su identidad (leads, despedida, aviso). */
+export function useImagenesEscena(): ImagenesEscena {
+  const { portada } = useContenido();
+  const fondo = useImagen(portada.fondo.imagen);
+  const sup = useImagen(portada.bandaSuperior.imagen);
+  const inf = useImagen(portada.bandaInferior.imagen);
+  return {
+    fondo: fondo.url,
+    bandaSuperior: { url: sup.url, x: portada.bandaSuperior.x, y: portada.bandaSuperior.y, ancho: sup.ancho, alto: sup.alto },
+    bandaInferior: { url: inf.url, x: portada.bandaInferior.x, y: portada.bandaInferior.y, ancho: inf.ancho, alto: inf.alto },
+  };
 }

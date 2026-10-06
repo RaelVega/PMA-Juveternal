@@ -51,7 +51,7 @@ console.log('Catálogos');
 const catalogos = {};
 const fuentes = { montserrat: equivalencias.fuentes.montserrat.archivo };
 for (const { id, export: exportRel } of equivalencias.catalogos) {
-  await ingerirCatalogo({ id, exportDir: enEspejo(exportRel), RAIZ, fuentes });
+  await ingerirCatalogo({ id, exportDir: enEspejo(exportRel), RAIZ, fuentes, sustitutas: Object.fromEntries(Object.entries(equivalencias.sustitutas ?? {}).filter(([k]) => !k.startsWith('_'))) });
   catalogos[id] = { archivo: `catalogos/${id}/catalogo.json` };
 }
 

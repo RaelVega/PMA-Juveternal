@@ -17,10 +17,30 @@
     "portada": "portada/fondo_anahuacjuveternal.png"
   },
   "catalogos": [
-    { "id": "anahuac", "export": "anahuac/CATALOGO PANTALLA TOUCH" }
+    {
+      "id": "anahuac",
+      "export": "anahuac/CATALOGO PANTALLA TOUCH"
+    }
   ],
   "fuentes": {
     "_nota": "Viven ya en contenido/ (no salen del espejo). La Montserrat variable (OFL) se llama «Montserrat Thin», como la pide el CSS de InDesign.",
-    "montserrat": { "archivo": "fuentes/Montserrat-Variable.ttf", "familia": "Montserrat Thin", "peso": "100 900" }
+    "montserrat": {
+      "archivo": "fuentes/Montserrat-Variable.ttf",
+      "familia": "Montserrat Thin",
+      "peso": "100 900"
+    }
+  },
+  "sustitutas": {
+    "_nota": "Fuentes que el export de InDesign pide y no vinieron: se sirven con ese mismo nombre de familia desde la libre más parecida (decisión de Rael, 06-10). «variacion» se añade a las reglas que usan esa familia.",
+    "Speeday": {
+      "archivo": "fuentes/Rubik-Italic-Variable.ttf",
+      "peso": "300 900",
+      "variacion": "\"wght\" 850",
+      "motivo": "Speeday es una display gruesa, inclinada 23° y redondeada: Rubik Black Italic (OFL)"
+    },
+    "Brush Script MT": {
+      "archivo": "fuentes/Yellowtail-Regular.ttf",
+      "motivo": "Brush Script MT es un pincel cursivo ligado: Yellowtail (Apache 2.0)"
+    }
   }
 }

@@ -14,6 +14,21 @@
   --sombra-control: 0 8px 24px rgb(0 0 0 / 0.22);
 
   --familia-interfaz: 'Montserrat Thin', system-ui, sans-serif;
+  /* La letra del título del salvapantallas («CONOCE NUESTROS / PRODUCTOS»): Montserrat itálica, en blanco con sombra. */
+  --familia-titulo: 'Montserrat Italica', 'Montserrat Thin', system-ui, sans-serif;
+  --sombra-texto: 0 4px 14px rgb(0 0 0 / 0.28);
+  --vidrio: rgb(255 255 255 / 0.16);
+  --vidrio-fuerte: rgb(255 255 255 / 0.28);
+  --borde-vidrio: rgb(255 255 255 / 0.7);
+  /* Aproximación en CSS del fondo del salvapantallas, para cuando no hay imágenes (pantalla de fallo). */
+  --fondo-dual-izquierda: linear-gradient(180deg, #e2501d 0%, #e3541f 12%, #c87a3b 30%, #1aa69c 55%, #15a39a 100%);
+  --fondo-dual-derecha: linear-gradient(180deg, #e14d1c 0%, #e5521b 45%, #d0703a 72%, #8f9a6c 88%, #1aa49b 100%);
+  --banda-izquierda: linear-gradient(90deg, #12a19a 0%, #12a19a 20%, rgb(18 161 154 / 0) 100%);
+  --banda-derecha: linear-gradient(270deg, #12a19a 0%, #12a19a 20%, rgb(18 161 154 / 0) 100%);
+  --cuerpo-titulo-1: 70px;
+  --cuerpo-titulo-2: 92px;
+  --peso-titulo-1: 500;
+  --peso-titulo-2: 800;
   --cuerpo-titulo: 64px;
   --cuerpo-texto: 34px;
   --cuerpo-detalle: 24px;
@@ -23,6 +38,20 @@
   --radio-tarjeta: 48px;
   --radio-pastilla: 999px;
   --toque-minimo: 88px;
+
+  /* Teclado del motor (leads): teclas de vidrio blanco sobre el fondo de marca. */
+  --tecla-lado: 88px;
+  --tecla-separacion: 12px;
+  --tecla-radio: 18px;
+  --tecla-fondo: rgb(255 255 255 / 0.92);
+  --tecla-color: var(--texto);
+  --tecla-sombra: 0 4px 10px rgb(0 0 0 / 0.16);
+  --tecla-cuerpo: 34px;
+  --tecla-peso: 700;
+  --tecla-fondo-borrar: var(--naranja-anahuac);
+  --tecla-color-borrar: var(--blanco);
+  --tecla-fondo-sugerencia: var(--turquesa-juveternal);
+  --tecla-color-sugerencia: var(--blanco);
 }
 
 body {

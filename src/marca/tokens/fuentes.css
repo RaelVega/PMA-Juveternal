@@ -1,0 +1,11 @@
+/*
+ * Letra de los títulos de la interfaz (leads, despedida, aviso, fallo): Montserrat
+ * itálica variable (OFL), la del título del salvapantallas. Va empaquetada, no en
+ * contenido/: la pantalla de fallo aparece justo cuando el contenido no cargó.
+ */
+@font-face {
+  font-family: 'Montserrat Italica';
+  src: url('../fuentes-ui/Montserrat-Italic-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: block;
+}

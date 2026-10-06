@@ -2,7 +2,10 @@ import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, type ReactNode } from 'react';
 import { LimiteErrores } from '../motor/kiosco/LimiteErrores';
 import { Catalogo } from './catalogo/Catalogo';
+import { AvisoExportacion } from './componentes/AvisoExportacion';
 import { AvisoInactividad } from './componentes/AvisoInactividad';
+import { Despedida } from './despedida/Despedida';
+import { Leads } from './leads/Leads';
 import { AVISO_INACTIVIDAD_MS, REINICIO_INACTIVIDAD_MS } from './configuracion';
 import { useDespachar, useFlujo } from './estado';
 import type { PasoDual } from './flujo';
@@ -10,7 +13,7 @@ import { Portada } from './portada/Portada';
 import { CURVA_ESTANDAR, DURACION } from './tokens/movimiento';
 import estilos from './Experiencia.module.css';
 
-const PANTALLAS: Record<PasoDual, () => ReactNode> = { portada: Portada, catalogo: Catalogo };
+const PANTALLAS: Record<PasoDual, () => ReactNode> = { portada: Portada, catalogo: Catalogo, leads: Leads, despedida: Despedida };
 
 export function Experiencia(): ReactNode {
   const paso = useFlujo((f) => f.paso);
@@ -43,6 +46,7 @@ export function Experiencia(): ReactNode {
         </AnimatePresence>
       </LimiteErrores>
       <AvisoInactividad segundosParaReinicio={(REINICIO_INACTIVIDAD_MS - AVISO_INACTIVIDAD_MS) / 1000} />
+      <AvisoExportacion />
     </>
   );
 }

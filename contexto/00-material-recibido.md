@@ -13,8 +13,9 @@ Pantalla dual PMA (Plantas Medicinales Anáhuac) × Juveternal. Vertical 1080×1
 
 ## Faltantes que hay que pedir
 
-1. **Anáhuac: Speeday (pág. 6) y Brush Script MT (pág. 14), con su licencia.** La carpeta `font/` del export no venía. Montserrat ya está resuelta (la variable OFL cubre todos los pesos); Minion Pro se declara pero ninguna página la usa.
-3. **Icono del ejecutable.** El actual es provisional (círculo turquesa | naranja, `ingesta/icono.mjs`).
+1. ~~Fuentes de Anáhuac~~: resuelto el 06-10 con las libres más parecidas (Speeday → Rubik Black Italic, Brush Script MT → Yellowtail; Montserrat, la variable OFL). Minion Pro se declara pero ninguna página la usa.
+3. ~~Icono del ejecutable~~: se queda el provisional (Rael, 06-10).
+4. Textos de leads, despedida, aviso y fallo, y el aviso de privacidad para los leads: revisión de marketing y del cliente.
 2. Juveternal: el proyecto o export de InDesign y las fichas.
 
 ## Observaciones del export de InDesign (Anáhuac)

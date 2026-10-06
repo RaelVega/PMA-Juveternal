@@ -1,39 +1,30 @@
 .arranque {
   position: absolute;
   inset: 0;
-  background: var(--naranja-anahuac);
-}
-
-.fallo {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-content: center;
-  gap: 40px;
-  padding: 0 120px;
-  background: var(--superficie);
-  text-align: center;
-}
-
-.falloTitulo {
-  margin: 0;
-  font-size: var(--cuerpo-titulo);
-  font-weight: var(--peso-titulo);
-  color: var(--texto);
+  background: var(--fondo-dual-izquierda) left / 50% 100% no-repeat, var(--fondo-dual-derecha) right / 50% 100% no-repeat;
 }
 
 .falloTexto {
+  position: absolute;
+  top: 600px;
+  left: 0;
+  width: 100%;
   margin: 0;
+  text-align: center;
   font-size: var(--cuerpo-texto);
-  font-weight: var(--peso-texto);
-  color: var(--texto-suave);
+  font-variation-settings: 'wght' 600;
+  text-shadow: var(--sombra-texto);
 }
 
 /* Detalle técnico, pequeño, para quien revise la pantalla. */
 .falloDetalle {
-  margin: 40px 0 0;
+  position: absolute;
+  bottom: 120px;
+  left: 120px;
+  right: 120px;
+  margin: 0;
+  text-align: center;
   font-size: var(--cuerpo-detalle);
-  color: var(--texto-suave);
-  opacity: 0.6;
+  opacity: 0.75;
   overflow-wrap: anywhere;
 }

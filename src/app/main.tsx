@@ -1,6 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import '../motor/kiosco/kiosco.css';
+import '../marca/tokens/fuentes.css';
 import '../marca/tokens/tokens.css';
 import { PruebaHumo } from '../humo/PruebaHumo';
 import { App } from '../marca/App';

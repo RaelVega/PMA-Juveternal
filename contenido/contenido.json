@@ -2,40 +2,275 @@
   "version": 1,
   "_pendientes": [
     "Juveternal: falta su proyecto de InDesign (y las fichas). Mientras tanto, tocar su lado del salvapantallas no abre nada (marcas.juveternal.catalogo = null).",
-    "Catálogo Anáhuac: el export no trae las fuentes Speeday (pág. 6, «DALE PAUSA…») ni Brush Script MT (pág. 14), y hay que confirmar su licencia; ahora salen con la letra de respaldo.",
     "Icono del ejecutable y favicon: provisionales (ingesta/icono.mjs); falta el de marketing.",
-    "Aviso de inactividad y pantalla de fallo: textos y forma tomados de Biocaps, donde se aprobaron; marketing no los dibujó para esta pantalla."
+    "Catálogo Anáhuac: Speeday (pág. 6) y Brush Script MT (pág. 14) no vinieron; se usan las libres más parecidas, Rubik Black Italic y Yellowtail (decisión de Rael, 06-10).",
+    "Textos de leads, despedida, aviso de inactividad y fallo: redacción propia con la identidad del salvapantallas; marketing los revisa.",
+    "leads.consentimiento: texto provisional. El aviso de privacidad (LFPDPPP) y su redacción los tiene que dar el cliente."
   ],
   "_portada": "Posiciones (px del lienzo) medidas al píxel contra la composición final de marketing (assets-fuente/portada/fondo_anahuacjuveternal.png).",
   "portada": {
-    "fondo": { "imagen": "portada-fondo", "x": 0, "y": 0 },
-    "bandaSuperior": { "imagen": "portada-banda-superior", "x": 0, "y": 307 },
-    "bandaInferior": { "imagen": "portada-banda-inferior", "x": 176, "y": 407 },
-    "titulo": { "imagen": "portada-titulo", "x": 63, "y": 291 },
+    "fondo": {
+      "imagen": "portada-fondo",
+      "x": 0,
+      "y": 0
+    },
+    "bandaSuperior": {
+      "imagen": "portada-banda-superior",
+      "x": 0,
+      "y": 307
+    },
+    "bandaInferior": {
+      "imagen": "portada-banda-inferior",
+      "x": 176,
+      "y": 407
+    },
+    "titulo": {
+      "imagen": "portada-titulo",
+      "x": 63,
+      "y": 291
+    },
     "marcas": [
       {
         "id": "juveternal",
         "lado": "izquierda",
-        "logo": { "imagen": "portada-logo-juveternal", "x": 17, "y": 903 },
-        "click": { "imagen": "portada-click-juveternal", "x": 128, "y": 1062 },
-        "mano": { "imagen": "portada-mano-juveternal", "x": 53, "y": 1095 },
-        "zona": [0, 640, 540, 1280],
+        "logo": {
+          "imagen": "portada-logo-juveternal",
+          "x": 17,
+          "y": 903
+        },
+        "click": {
+          "imagen": "portada-click-juveternal",
+          "x": 128,
+          "y": 1062
+        },
+        "mano": {
+          "imagen": "portada-mano-juveternal",
+          "x": 53,
+          "y": 1095
+        },
+        "zona": [
+          0,
+          640,
+          540,
+          1280
+        ],
         "catalogo": null
       },
       {
         "id": "anahuac",
         "lado": "derecha",
-        "logo": { "imagen": "portada-logo-anahuac", "x": 562, "y": 903 },
-        "click": { "imagen": "portada-click-anahuac", "x": 693, "y": 1062 },
-        "mano": { "imagen": "portada-mano-anahuac", "x": 832, "y": 1095 },
-        "zona": [540, 640, 540, 1280],
+        "logo": {
+          "imagen": "portada-logo-anahuac",
+          "x": 562,
+          "y": 903
+        },
+        "click": {
+          "imagen": "portada-click-anahuac",
+          "x": 693,
+          "y": 1062
+        },
+        "mano": {
+          "imagen": "portada-mano-anahuac",
+          "x": 832,
+          "y": 1095
+        },
+        "zona": [
+          540,
+          640,
+          540,
+          1280
+        ],
         "catalogo": "anahuac"
       }
     ]
   },
   "catalogo": {
     "anterior": "Página anterior",
-    "siguiente": "Página siguiente"
+    "siguiente": "Página siguiente",
+    "finalizar": "Ir a dejar mis datos"
   },
-  "aviso": { "titulo": "¿SIGUES AHÍ?", "texto": "Toca la pantalla para continuar" }
+  "aviso": {
+    "titulo": [
+      "¿SIGUES",
+      "AHÍ?"
+    ],
+    "texto": "Toca la pantalla para continuar"
+  },
+  "leads": {
+    "_nota": "Una sola pantalla para las dos marcas, al final de cualquier catálogo. El lead guarda de qué marca venía.",
+    "titulo": [
+      "DÉJANOS",
+      "TUS DATOS"
+    ],
+    "texto": "y recibe información de nuestros productos",
+    "campos": {
+      "nombre": {
+        "etiqueta": "NOMBRE",
+        "maxCaracteres": 40
+      },
+      "correo": {
+        "etiqueta": "CORREO",
+        "maxCaracteres": 60
+      },
+      "empresa": {
+        "etiqueta": "EMPRESA (OPCIONAL)",
+        "maxCaracteres": 40
+      }
+    },
+    "consentimiento": "Al enviar aceptas que Grupo AB te contacte conforme a su aviso de privacidad.",
+    "enviar": "ENVIAR",
+    "omitir": "OMITIR",
+    "teclado": {
+      "filas": [
+        [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "0"
+        ],
+        [
+          "Q",
+          "W",
+          "E",
+          "R",
+          "T",
+          "Y",
+          "U",
+          "I",
+          "O",
+          "P"
+        ],
+        [
+          "A",
+          "S",
+          "D",
+          "F",
+          "G",
+          "H",
+          "J",
+          "K",
+          "L",
+          "Ñ"
+        ],
+        [
+          "Z",
+          "X",
+          "C",
+          "V",
+          "B",
+          "N",
+          "M",
+          "&",
+          "-",
+          "."
+        ],
+        [
+          "Á",
+          "É",
+          "Í",
+          "Ó",
+          "Ú",
+          "Ü"
+        ]
+      ],
+      "borrar": "BORRAR",
+      "espacio": "ESPACIO"
+    },
+    "tecladoCorreo": {
+      "filas": [
+        [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "0"
+        ],
+        [
+          "q",
+          "w",
+          "e",
+          "r",
+          "t",
+          "y",
+          "u",
+          "i",
+          "o",
+          "p"
+        ],
+        [
+          "a",
+          "s",
+          "d",
+          "f",
+          "g",
+          "h",
+          "j",
+          "k",
+          "l",
+          "@"
+        ],
+        [
+          "z",
+          "x",
+          "c",
+          "v",
+          "b",
+          "n",
+          "m",
+          "."
+        ],
+        [
+          "-",
+          "_"
+        ]
+      ],
+      "borrar": "BORRAR",
+      "espacio": "ESPACIO"
+    },
+    "_dominios": "Autocompletado del correo: sin «@», se ofrecen los dominios; tras la «@», los que coinciden con lo escrito y las terminaciones para correos de empresa.",
+    "dominios": [
+      "gmail.com",
+      "hotmail.com",
+      "outlook.com",
+      "yahoo.com",
+      "icloud.com",
+      "live.com"
+    ],
+    "terminaciones": [
+      ".com",
+      ".com.mx",
+      ".mx",
+      ".org",
+      ".net"
+    ],
+    "maxSugerencias": 4
+  },
+  "despedida": {
+    "titulo": [
+      "¡GRACIAS POR",
+      "TU VISITA!"
+    ],
+    "texto": "Te esperamos en nuestro stand",
+    "_segundos": "Tiempo antes de volver solo al salvapantallas (un toque vuelve antes).",
+    "segundos": 10
+  },
+  "exportacion": {
+    "_nota": "Aviso para el staff tras Ctrl+Shift+E. «{n}» es el número de leads exportados.",
+    "hecha": "LEADS EXPORTADOS: {n}",
+    "destinoEjecutable": "En la carpeta «leads», junto al programa",
+    "destinoNavegador": "En la carpeta de descargas",
+    "fallo": "NO SE PUDIERON EXPORTAR LOS LEADS",
+    "falloDetalle": "Vuelve a intentarlo con Ctrl+Shift+E"
+  }
 }

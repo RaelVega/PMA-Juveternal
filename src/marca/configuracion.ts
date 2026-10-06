@@ -7,7 +7,7 @@ export const REINICIO_INACTIVIDAD_MS = 55_000;
  * es justo cuando no hay de dónde sacar el texto. Todo lo demás vive en el JSON.
  */
 export const TEXTO_FALLO_CONTENIDO = {
-  titulo: 'VOLVEMOS EN UN MOMENTO',
+  titulo: ['VOLVEMOS EN', 'UN MOMENTO'],
   texto: 'La pantalla se está reiniciando',
 } as const;
 

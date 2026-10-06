@@ -33,3 +33,7 @@ PRUEBA TECNICA (antes del evento, en la laptop del stand, con el WiFi apagado)
 AL CIERRE DEL EVENTO
   - Los datos anonimos de uso quedan en 1-EJECUTABLE\telemetria\ (un archivo por dia).
     Copia esa carpeta y entregala.
+  - Los contactos (leads) quedan en 1-EJECUTABLE\leads\ (un CSV por dia, se abre en Excel).
+    Ctrl + Shift + E exporta todos a leads\exportacion-....csv y lo confirma en pantalla.
+    Si se uso la opcion 2 o 3, en esa pantalla Ctrl + Shift + E los descarga desde Edge.
+    Son datos personales: no los compartas fuera del equipo de Grupo AB.

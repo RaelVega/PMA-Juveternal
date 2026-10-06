@@ -70,7 +70,7 @@ for (let n = 0; n < total; n++) {
   comprobar(d < (conVideo ? TOLERANCIA_VIDEO : TOLERANCIA), `página ${n} igual a InDesign (diferencia ${d.toFixed(1)}${conVideo ? ', con video' : ''})`);
   rmSync(path.join(SALIDA, `${nombre}-sin-flechas.png`));
 }
-comprobar((await flecha('Página siguiente').count()) === 0, 'en la última página no hay «siguiente»');
+comprobar((await flecha('Página siguiente').count()) === 0 && (await flecha('Ir a dejar mis datos').count()) === 1, 'en la última página «siguiente» lleva a los leads');
 
 // Ficha: la página 2 (tés) abre «Té Árnica» y se cierra con la ✕.
 await pagina.evaluate(() => undefined);
@@ -99,10 +99,79 @@ await flecha('Página anterior').click();
 await pagina.waitForTimeout(600);
 comprobar((await paso()) === 'portada', '«anterior» desde la portada del catálogo vuelve al salvapantallas');
 
+// Final del catálogo → leads → despedida → salvapantallas.
+await pagina.mouse.click(810, 1000);
+await pagina.waitForTimeout(600);
+for (let n = 1; n < total; n++) { await flecha('Página siguiente').click(); await pagina.waitForTimeout(90); }
+await pagina.waitForTimeout(600);
+await flecha('Ir a dejar mis datos').click();
+await pagina.waitForTimeout(1500);
+comprobar((await paso()) === 'leads', 'la flecha de la última página lleva a los leads');
+await captura('leads-vacio');
+const tecla = (t) => pagina.getByRole('button', { name: t, exact: true }).click();
+await tecla('ENVIAR');
+await pagina.waitForTimeout(300);
+comprobar((await paso()) === 'leads', 'ENVIAR sin datos no avanza');
+for (const l of 'ANA') await tecla(l);
+await tecla('ESPACIO');
+for (const l of 'LÓPEZ') await tecla(l);
+await pagina.getByRole('button', { name: 'CORREO', exact: true }).click();
+for (const l of 'ana') await tecla(l);
+await pagina.waitForTimeout(200);
+await captura('leads-correo-sugerencias');
+await tecla('@gmail.com');
+await pagina.waitForTimeout(200);
+await captura('leads-completo');
+await tecla('ENVIAR');
+await pagina.waitForTimeout(1600);
+comprobar((await paso()) === 'despedida', 'ENVIAR con nombre y correo lleva a la despedida');
+await captura('despedida');
+await pagina.waitForTimeout(9500);
+comprobar((await paso()) === 'portada', 'la despedida vuelve sola al salvapantallas');
+
+// OMITIR también lleva a la despedida.
+await pagina.mouse.click(810, 1000);
+await pagina.waitForTimeout(600);
+for (let n = 1; n < total; n++) { await flecha('Página siguiente').click(); await pagina.waitForTimeout(90); }
+await pagina.waitForTimeout(400);
+await flecha('Ir a dejar mis datos').click();
+await pagina.waitForTimeout(1200);
+await tecla('OMITIR');
+await pagina.waitForTimeout(800);
+comprobar((await paso()) === 'despedida', 'OMITIR lleva a la despedida');
+await pagina.mouse.click(540, 1500);
+await pagina.waitForTimeout(800);
+comprobar((await paso()) === 'portada', 'un toque en la despedida vuelve al salvapantallas');
+
+// Página 6 de cerca: la sustituta de Speeday (Rubik Black Italic).
+await pagina.mouse.click(810, 1000);
+await pagina.waitForTimeout(600);
+for (let n = 1; n <= 6; n++) { await flecha('Página siguiente').click(); await pagina.waitForTimeout(90); }
+await pagina.waitForTimeout(3600);
+await pagina.screenshot({ path: path.join(SALIDA, 'fuente-speeday-pag06.png'), clip: { x: 0, y: 150, width: 1080, height: 300 } });
+
 // Captura en horizontal (laptop): el lienzo se escala como bloque.
 await pagina.setViewportSize({ width: 1440, height: 900 });
 await pagina.waitForTimeout(500);
 await captura('horizontal-1440x900');
+// Aviso de inactividad y vuelta al salvapantallas, en tiempo real (con reloj falso los fundidos no avanzan).
+const espera = await navegador.newPage({ viewport: { width: 1080, height: 1920 } });
+espera.on('pageerror', (e) => errores.push(e.message));
+await espera.goto(URL);
+await espera.waitForSelector('[data-paso="portada"]', { timeout: 15_000 });
+await espera.waitForTimeout(2600);
+await espera.mouse.click(810, 1000);
+await espera.waitForTimeout(46_500);
+await espera.screenshot({ path: path.join(SALIDA, 'aviso-inactividad.png') });
+comprobar(await espera.getByText('Toca la pantalla para continuar').isVisible(), 'a los 45 s aparece el aviso de inactividad');
+await espera.waitForTimeout(10_000);
+comprobar((await espera.getAttribute('[data-paso]:not([style*="opacity: 0"])', 'data-paso').catch(() => '?')) === 'portada', 'a los 55 s vuelve al salvapantallas');
+await espera.close();
+const fallo = await navegador.newPage({ viewport: { width: 1080, height: 1920 } });
+await fallo.goto(`${URL}?fallo`);
+await fallo.waitForTimeout(1500);
+await fallo.screenshot({ path: path.join(SALIDA, 'fallo.png') });
+await fallo.close();
 await navegador.close();
 
 if (errores.length) {

@@ -58,7 +58,7 @@ function acotarCss(css, reescribirUrl) {
   return salida;
 }
 
-export async function ingerirCatalogo({ id, exportDir, RAIZ, fuentes }) {
+export async function ingerirCatalogo({ id, exportDir, RAIZ, fuentes, sustitutas = {} }) {
   const recursos = resolverNfc(exportDir, 'publication-web-resources');
   const dirHtml = path.join(recursos, 'html');
   const salida = path.join(RAIZ, 'contenido', 'catalogos', id);
@@ -77,7 +77,15 @@ export async function ingerirCatalogo({ id, exportDir, RAIZ, fuentes }) {
   const navegador = await chromium.launch({ channel: 'chrome' });
   // El export pide ../../font/*.ttf, que no vino: se sirve nuestra Montserrat para que la referencia salga con su letra.
   const montserrat = readFileSync(path.join(RAIZ, 'contenido', fuentes.montserrat));
-  const enrutarFuentes = (contexto) => contexto.route('**/font/**', (ruta) => (/Montserrat/i.test(ruta.request().url()) ? ruta.fulfill({ body: montserrat, contentType: 'font/ttf' }) : ruta.abort()));
+  // Las sustitutas también en la referencia, para que la «página completa» salga con la misma letra que la app.
+  const porArchivo = Object.entries(sustitutas).map(([familia, s]) => [familia.replace(/\s+/g, '').toLowerCase(), readFileSync(path.join(RAIZ, 'contenido', s.archivo))]);
+  const enrutarFuentes = (contexto) =>
+    contexto.route('**/font/**', (ruta) => {
+      const archivo = decodeURIComponent(ruta.request().url().split('/').pop() ?? '').toLowerCase();
+      if (/montserrat/.test(archivo)) return ruta.fulfill({ body: montserrat, contentType: 'font/ttf' });
+      const sustituta = porArchivo.find(([clave]) => archivo.startsWith(clave));
+      return sustituta ? ruta.fulfill({ body: sustituta[1], contentType: 'font/ttf' }) : ruta.abort();
+    });
   const ctxRef = await navegador.newContext({ viewport: { width: 1080, height: 1920 } });
   await enrutarFuentes(ctxRef);
   // Sin JS: el DOM tal como lo escribió InDesign, sin los cambios de su script.
@@ -191,8 +199,18 @@ export async function ingerirCatalogo({ id, exportDir, RAIZ, fuentes }) {
     const buffer = readFileSync(resolverNfc(path.join(recursos, 'css'), decodeURI(m[2])));
     fondos.set(m[2], await convertirImagen(m[2], buffer, 0, 0));
   }
-  const css = acotarCss(cssOrigen, (cuerpo) => cuerpo.replace(/url\((["']?)(\.\.\/image\/[^"')]+)\1\)/g, (_, _c, ruta) => `url("img/${fondos.get(ruta)}")`));
-  const caras = `/* Generado por ingesta/catalogo-indesign.mjs: no editar a mano. */\n@font-face { font-family: "Montserrat Thin"; src: url("../../${fuentes.montserrat}") format("truetype"); font-weight: 100 900; font-display: block; }\n`;
+  const conVariacion = (cuerpo) => {
+    for (const [familia, s] of Object.entries(sustitutas)) {
+      if (s.variacion && new RegExp(`font-family:\\s*"?${familia}"?`, 'i').test(cuerpo)) cuerpo += `\n\tfont-variation-settings:${s.variacion};`;
+    }
+    return cuerpo;
+  };
+  const css = acotarCss(cssOrigen, (cuerpo) => conVariacion(cuerpo.replace(/url\((["']?)(\.\.\/image\/[^"')]+)\1\)/g, (_, _c, ruta) => `url("img/${fondos.get(ruta)}")`)));
+  const cara = (familia, archivo, peso) => `@font-face { font-family: "${familia}"; src: url("../../${archivo}") format("truetype"); ${peso ? `font-weight: ${peso}; ` : ''}font-display: block; }\n`;
+  const caras =
+    '/* Generado por ingesta/catalogo-indesign.mjs: no editar a mano. */\n' +
+    cara('Montserrat Thin', fuentes.montserrat, '100 900') +
+    Object.entries(sustitutas).map(([familia, s]) => `/* ${familia}: ${s.motivo} */\n` + cara(familia, s.archivo, s.peso)).join('');
   writeFileSync(path.join(salida, 'estilos.css'), caras + css);
 
   const catalogo = { version: 1, generado: 'ingesta/catalogo-indesign.mjs — no editar a mano', estilos: `catalogos/${id}/estilos.css`, paginas: indice };

@@ -79,7 +79,12 @@ export function Catalogo(): ReactNode {
             exit={{ opacity: 0, transition: { duration: DURACION.salida / 1000, ease: CURVA_ESTANDAR } }}
           >
             <Flecha sentido="anterior" etiqueta={textos.anterior} alTocar={retroceder} />
-            {pagina < paginas.length - 1 && <Flecha sentido="siguiente" etiqueta={textos.siguiente} alTocar={() => irA(pagina + 1)} />}
+            {/* En la última página, «siguiente» lleva a los leads (la misma pantalla al final de cualquier catálogo). */}
+            {pagina < paginas.length - 1 ? (
+              <Flecha sentido="siguiente" etiqueta={textos.siguiente} alTocar={() => irA(pagina + 1)} />
+            ) : (
+              <Flecha sentido="siguiente" etiqueta={textos.finalizar} alTocar={() => despachar({ tipo: 'avanzar', origen: 'visitante' })} />
+            )}
           </motion.div>
         )}
       </AnimatePresence>

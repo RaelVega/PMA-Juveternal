@@ -1,5 +1,9 @@
 /* Generado por ingesta/catalogo-indesign.mjs: no editar a mano. */
 @font-face { font-family: "Montserrat Thin"; src: url("../../fuentes/Montserrat-Variable.ttf") format("truetype"); font-weight: 100 900; font-display: block; }
+/* Speeday: Speeday es una display gruesa, inclinada 23° y redondeada: Rubik Black Italic (OFL) */
+@font-face { font-family: "Speeday"; src: url("../../fuentes/Rubik-Italic-Variable.ttf") format("truetype"); font-weight: 300 900; font-display: block; }
+/* Brush Script MT: Brush Script MT es un pincel cursivo ligado: Yellowtail (Apache 2.0) */
+@font-face { font-family: "Brush Script MT"; src: url("../../fuentes/Yellowtail-Regular.ttf") format("truetype"); font-display: block; }
 @-webkit-keyframes _idGenKeyFrames-0 {
 0% { opacity:0; }
 100% { opacity:1; }
@@ -2650,7 +2654,8 @@
 	font-style:normal;
 	font-weight:normal;
 	text-transform:uppercase;
-}
+
+	font-variation-settings:"wght" 850;}
 .indesign span.CharOverride-22 {
 	color:#ffed00;
 	font-family:Speeday, sans-serif;
@@ -2658,7 +2663,8 @@
 	font-style:normal;
 	font-weight:normal;
 	text-transform:uppercase;
-}
+
+	font-variation-settings:"wght" 850;}
 .indesign span.CharOverride-23 {
 	color:#ffffff;
 	font-family:"Montserrat Thin", sans-serif;

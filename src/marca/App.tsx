@@ -3,17 +3,19 @@ import { urlContenido } from '../motor/contenido/cargar';
 import { crearAlmacenFlujo } from '../motor/maquina/almacen';
 import { registrarFuentesDeContenido } from '../motor/precarga/fuentes';
 import { precargar } from '../motor/precarga/precarga';
+import { EscenaDual } from './componentes/EscenaDual';
 import { AVISO_INACTIVIDAD_MS, REINICIO_INACTIVIDAD_MS, REINTENTO_FALLO_MS, TEXTO_FALLO_CONTENIDO } from './configuracion';
 import { cargarContenido, type CatalogoCargado } from './contenido/cargar';
 import { ProveedorRecursos, type Recursos } from './estado';
 import { Experiencia } from './Experiencia';
 import { crearMaquinaDual } from './flujo';
+import { iniciarGuardadoLeads } from './leads/guardar';
 import estilos from './App.module.css';
 
 type Carga = { fase: 'cargando' } | { fase: 'lista'; recursos: Recursos } | { fase: 'fallo'; detalle: string };
 
-/** Pesos de la interfaz que se usan (aviso de inactividad): se cargan antes de la portada. */
-const FUENTES_INTERFAZ = ['800 64px "Montserrat Thin"', '500 34px "Montserrat Thin"'];
+/** Letras de la interfaz (títulos en itálica, campos, teclado): se cargan antes del salvapantallas. */
+const FUENTES_INTERFAZ = ['600 34px "Montserrat Thin"', '500 70px "Montserrat Italica"', '800 92px "Montserrat Italica"'];
 
 /** El CSS de InDesign de cada catálogo, enlazado una vez y esperado: ninguna página aparece sin estilo. */
 function enlazarEstilos(catalogo: CatalogoCargado): Promise<void> {
@@ -45,7 +47,11 @@ async function iniciar(): Promise<Recursos> {
   if (fuentesFallidas.length || fallidas.length || agotoTiempo) console.warn('Precarga incompleta', { fuentesFallidas, fallidas, agotoTiempo });
 
   const paginas = Object.fromEntries(Object.values(catalogos).map((c) => [c.id, c.paginas.length]));
-  const almacen = crearAlmacenFlujo(crearMaquinaDual(paginas), { avisoMs: AVISO_INACTIVIDAD_MS, reinicioMs: REINICIO_INACTIVIDAD_MS });
+  const { campos, consentimiento } = cargado.contenido.leads;
+  const maxCaracteres = { nombre: campos.nombre.maxCaracteres, correo: campos.correo.maxCaracteres, empresa: campos.empresa.maxCaracteres };
+  const almacen = crearAlmacenFlujo(crearMaquinaDual(paginas, { maxCaracteres }), { avisoMs: AVISO_INACTIVIDAD_MS, reinicioMs: REINICIO_INACTIVIDAD_MS });
+  // Los leads se guardan al pasar a la despedida, fuera de la máquina (que sigue siendo pura).
+  iniciarGuardadoLeads(almacen, consentimiento);
   return { ...cargado, almacen };
 }
 
@@ -79,11 +85,11 @@ export function App(): ReactNode {
   if (carga.fase === 'cargando') return <div className={estilos.arranque} />;
   if (carga.fase === 'fallo') {
     return (
-      <div className={estilos.fallo}>
-        <p className={estilos.falloTitulo}>{TEXTO_FALLO_CONTENIDO.titulo}</p>
+      // Sin imágenes de contenido/ (justo es lo que pudo fallar): el fondo y las bandas se dibujan en CSS.
+      <EscenaDual titulo={TEXTO_FALLO_CONTENIDO.titulo}>
         <p className={estilos.falloTexto}>{TEXTO_FALLO_CONTENIDO.texto}</p>
         <p className={estilos.falloDetalle}>{carga.detalle}</p>
-      </div>
+      </EscenaDual>
     );
   }
   return (
