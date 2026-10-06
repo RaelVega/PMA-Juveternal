@@ -4,6 +4,8 @@ Pantalla táctil dual (vertical 1080×1920, `.exe` en Windows) para el stand de 
 
 **Todo en español:** respuestas, comentarios, identificadores y mensajes de commit. Los commits van sin línea de coautoría.
 
+Repositorio: https://github.com/RaelVega/PMA-Juveternal (**privado**: lleva el catálogo y las imágenes del cliente; rama `main`). Sin GitHub Pages ni Netlify por ahora.
+
 ## Fuente de verdad
 
 - **El diseño es de marketing y se replica tal cual:** el salvapantallas (piezas de `assets-fuente/portada/`, posiciones medidas contra `fondo_anahuacjuveternal.png`) y los catálogos exportados de InDesign. No se proponen cambios de diseño.
