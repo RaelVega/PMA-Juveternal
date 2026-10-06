@@ -1,0 +1,26 @@
+{
+  "_nota": "Nombres del espejo (assets-fuente/, nunca se renombra) → ids de la app. Las rutas son relativas a assets-fuente/.",
+  "portada": {
+    "_origen": "Piezas del salvapantallas entregadas el 05-10 («FONDO FLUJO ANAHUAC-JUVETERNAL TOUCH»). Su posición sale de la composición final (referencias.portada) y vive en contenido.json.",
+    "fondo": "portada/FONDO FLUJO ANAHUAC-JUVETERNAL TOUCH/Recurso 15.png",
+    "titulo": "portada/FONDO FLUJO ANAHUAC-JUVETERNAL TOUCH/Recurso 12.png",
+    "banda-superior": "portada/FONDO FLUJO ANAHUAC-JUVETERNAL TOUCH/Recurso 11.png",
+    "banda-inferior": "portada/FONDO FLUJO ANAHUAC-JUVETERNAL TOUCH/Recurso 10.png",
+    "logo-juveternal": "portada/FONDO FLUJO ANAHUAC-JUVETERNAL TOUCH/Recurso 4.png",
+    "logo-anahuac": "portada/FONDO FLUJO ANAHUAC-JUVETERNAL TOUCH/Recurso 5.png",
+    "click-juveternal": "portada/FONDO FLUJO ANAHUAC-JUVETERNAL TOUCH/Recurso 6.png",
+    "click-anahuac": "portada/FONDO FLUJO ANAHUAC-JUVETERNAL TOUCH/Recurso 7.png",
+    "mano-juveternal": "portada/FONDO FLUJO ANAHUAC-JUVETERNAL TOUCH/Recurso 9.png",
+    "mano-anahuac": "portada/FONDO FLUJO ANAHUAC-JUVETERNAL TOUCH/Recurso 8.png"
+  },
+  "referencias": {
+    "portada": "portada/fondo_anahuacjuveternal.png"
+  },
+  "catalogos": [
+    { "id": "anahuac", "export": "anahuac/CATALOGO PANTALLA TOUCH" }
+  ],
+  "fuentes": {
+    "_nota": "Viven ya en contenido/ (no salen del espejo). La Montserrat variable (OFL) se llama «Montserrat Thin», como la pide el CSS de InDesign.",
+    "montserrat": { "archivo": "fuentes/Montserrat-Variable.ttf", "familia": "Montserrat Thin", "peso": "100 900" }
+  }
+}

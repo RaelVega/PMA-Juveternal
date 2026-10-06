@@ -1,0 +1,66 @@
+.teclado {
+  display: grid;
+  gap: var(--tecla-separacion, 12px);
+  justify-items: center;
+}
+
+.fila {
+  display: flex;
+  gap: var(--tecla-separacion, 12px);
+}
+
+.tecla {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: var(--tecla-lado, 88px);
+  height: var(--tecla-lado, 88px);
+  border-radius: var(--tecla-radio, 14px);
+  background: var(--tecla-fondo, #eee);
+  color: var(--tecla-color, #333);
+  box-shadow: var(--tecla-sombra, none);
+  font-family: var(--familia-interfaz);
+  font-size: var(--tecla-cuerpo, 35px);
+  font-weight: var(--tecla-peso, 700);
+}
+
+/* Espacio y borrar ocupan dos teclas cada una. */
+.ancha {
+  width: calc(var(--tecla-lado, 88px) * 2 + var(--tecla-separacion, 12px));
+}
+
+.borrar {
+  background: var(--tecla-fondo-borrar, var(--tecla-fondo, #eee));
+  color: var(--tecla-color-borrar, var(--tecla-color, #333));
+  font-size: var(--tecla-cuerpo-borrar, 24px);
+}
+
+.texto {
+  text-box: trim-both cap alphabetic;
+}
+
+.icono {
+  width: 32px;
+  height: 24px;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+/* Autocompletado: teclas del ancho de su texto, en una fila de alto fijo. */
+.sugerencias {
+  min-height: var(--tecla-alto-sugerencia, 72px);
+}
+
+.sugerencia {
+  width: auto;
+  height: var(--tecla-alto-sugerencia, 72px);
+  padding: 0 var(--tecla-relleno-sugerencia, 22px);
+  background: var(--tecla-fondo-sugerencia, var(--tecla-fondo, #eee));
+  color: var(--tecla-color-sugerencia, var(--tecla-color, #333));
+  font-size: var(--tecla-cuerpo-sugerencia, 28px);
+  text-transform: none;
+}

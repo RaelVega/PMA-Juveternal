@@ -1,0 +1,44 @@
+# Vía A: ejecutable portable.
+# Sin instalador, sin permisos de administrador.
+appId: mx.xestionintelixente.pma-juveternal
+productName: PMA-Juveternal
+copyright: Xestión Intelixente
+directories:
+  output: paquetes
+files:
+  - dist/**/*
+  - "!dist/contenido/**/*"
+  - dist-electron/**/*
+  - package.json
+# El contenido va fuera del asar, junto al ejecutable: se sustituye sin recompilar.
+# Sale de dist/contenido, ya superpuesto por la build (contenido/ + variantes/<variante>/contenido/).
+extraResources:
+  - from: dist/contenido
+    to: contenido
+asar: true
+compression: normal
+electronLanguages: [es, es-419, en-US]
+win:
+  # `dir` es la vía principal. El .exe portable de un solo archivo se genera
+  # aparte (`npm run empaquetar:win-portable`): su NSIS necesita Windows o
+  # Rosetta en un Mac con Apple Silicon.
+  target:
+    - target: dir
+      arch: [x64]
+  # Sin firma de código, pero con los recursos editados (icono y nombre): electron-builder
+  # los escribe en JS, sin wine, también desde macOS. La ventana y la barra de tareas
+  # toman el icono de BrowserWindow.icon (main.ts). Se genera con `npm run icono`.
+  signExecutable: false
+  icon: cascaras/icono/icono.png
+portable:
+  artifactName: PMA-Juveternal-${version}-portable.exe
+# Universal: un solo .app para Mac con Intel y con Apple Silicon. Sin firma de
+# Apple (identity: null); empaquetar-mac.mjs le pone una firma ad-hoc, sin ella
+# Apple Silicon lo da por «dañado».
+mac:
+  target:
+    - target: dir
+      arch: [universal]
+  identity: null
+  icon: cascaras/icono/icono-mac.png
+  category: public.app-category.business

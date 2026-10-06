@@ -1,0 +1,39 @@
+.arranque {
+  position: absolute;
+  inset: 0;
+  background: var(--naranja-anahuac);
+}
+
+.fallo {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 40px;
+  padding: 0 120px;
+  background: var(--superficie);
+  text-align: center;
+}
+
+.falloTitulo {
+  margin: 0;
+  font-size: var(--cuerpo-titulo);
+  font-weight: var(--peso-titulo);
+  color: var(--texto);
+}
+
+.falloTexto {
+  margin: 0;
+  font-size: var(--cuerpo-texto);
+  font-weight: var(--peso-texto);
+  color: var(--texto-suave);
+}
+
+/* Detalle técnico, pequeño, para quien revise la pantalla. */
+.falloDetalle {
+  margin: 40px 0 0;
+  font-size: var(--cuerpo-detalle);
+  color: var(--texto-suave);
+  opacity: 0.6;
+  overflow-wrap: anywhere;
+}

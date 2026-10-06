@@ -1,0 +1,15 @@
+# Vía B: servidor estático local. Solo escucha en 127.0.0.1: así Windows no
+# muestra el aviso del firewall (que pide permisos de administrador).
+{
+	admin off
+	auto_https off
+	persist_config off
+}
+
+http://localhost:4173 {
+	bind 127.0.0.1
+	# Entre comillas: la ruta puede llevar espacios y acentos.
+	root * "{$RAIZ_WEB:web}"
+	file_server
+	header Cache-Control no-cache
+}

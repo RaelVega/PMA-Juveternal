@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="robots" content="noindex, nofollow" />
+    <!-- Icono del ejecutable (npm run icono). Vite lo copia a assets/ con hash. -->
+    <link rel="icon" type="image/png" href="./cascaras/icono/icono.png" />
+    <title>Anáhuac · Juveternal</title>
+    <style>
+      /* Aviso sin JavaScript: React lo reemplaza al montar. Si la app no arranca
+         (p. ej. abierta con doble clic, por file://), aparece a los 3 s en lugar de una pantalla en blanco. */
+      .sin-arranque {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-content: center;
+        gap: 16px;
+        padding: 48px;
+        background: #fff;
+        color: #505050;
+        font: 600 28px/1.3 system-ui, sans-serif;
+        text-align: center;
+        opacity: 0;
+        animation: aparecer 0.3s 3s forwards;
+      }
+      .sin-arranque strong {
+        font-size: 40px;
+      }
+      @keyframes aparecer {
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="raiz">
+      <div class="sin-arranque">
+        <strong>La pantalla no pudo arrancar</strong>
+        <span>Ábrela con PMA-Juveternal.exe o con iniciar-respaldo.bat.<br />Nunca con doble clic sobre index.html.</span>
+      </div>
+    </div>
+    <script type="module" src="./src/app/main.tsx"></script>
+  </body>
+</html>

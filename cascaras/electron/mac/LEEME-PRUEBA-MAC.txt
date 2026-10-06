@@ -1,0 +1,31 @@
+ANAHUAC + JUVETERNAL - PANTALLA TÁCTIL - PAQUETE DE PRUEBA PARA MAC
+======================================================
+
+Funciona en Mac con Apple Silicon (M1 en adelante) y con Intel. macOS 12 o posterior.
+
+1. Descomprime el .zip (doble clic) y mueve la carpeta al Escritorio o a Documentos.
+
+2. La app no está firmada por Apple. La primera vez, abre Terminal y escribe
+   (sin darle Enter todavía):
+
+       xattr -dr com.apple.quarantine
+
+   deja un espacio al final, arrastra la carpeta a la ventana de Terminal y pulsa Enter.
+   Solo hace falta una vez por Mac. Si la carpeta llegó por USB, normalmente no hace falta.
+
+   Sin Terminal: doble clic en el .app > "no se puede abrir" > Ajustes del Sistema >
+   Privacidad y seguridad > "Abrir igualmente".
+
+3. Elige:
+     - El .app (doble clic): modo kiosco, pantalla completa, como en el evento. Cursor oculto.
+     - probar-en-ventana.command: en una ventana y con cursor, para probar con mouse.
+     - prueba-tecnica.command: lista de verificaciones; todo debe terminar en "TODO BIEN".
+
+4. Salir: Ctrl + Shift + Q (la tecla Control, no Cmd) o Cmd + Q.
+
+5. Con una pantalla táctil conectada: rótala en Ajustes del Sistema > Pantallas > Rotación.
+   La app se abre sola en la pantalla que esté en vertical.
+
+Datos: las carpetas datos-kiosco y telemetria aparecen junto al .app. Si esa carpeta
+no admite escritura, van a Documentos/PMA-Juveternal.
+

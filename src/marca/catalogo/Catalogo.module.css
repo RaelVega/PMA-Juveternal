@@ -1,0 +1,22 @@
+.catalogo {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--blanco);
+}
+
+.capa {
+  position: absolute;
+  inset: 0;
+}
+
+/* Capa de las flechas: no capta toques salvo en las propias flechas. */
+.flechas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.flechas > * {
+  pointer-events: auto;
+}

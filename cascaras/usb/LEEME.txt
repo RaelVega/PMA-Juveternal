@@ -1,0 +1,35 @@
+ANAHUAC + JUVETERNAL - PANTALLA TACTIL - EXPO FAC 2026
+==========================================
+
+ANTES DEL EVENTO (una sola vez)
+  - Copia esta carpeta completa al disco de la laptop (por ejemplo al Escritorio).
+    No hace falta instalar nada ni permisos de administrador.
+  - La pantalla va en vertical desde Windows:
+    Configuracion > Pantalla > Orientacion > Vertical. Nunca de otra forma.
+
+CADA DIA: arrancar en este orden. Si una opcion falla, pasa a la siguiente.
+
+  1. 1-EJECUTABLE\PMA-Juveternal.exe  (doble clic)
+     Si Windows dice "Windows protegio tu PC": Mas informacion > Ejecutar de todas formas.
+
+  2. 2-RESPALDO\iniciar-respaldo.bat  (doble clic)
+     Abre la misma pantalla en Microsoft Edge.
+
+  3. 2-RESPALDO\iniciar-sin-exe.bat  (doble clic)
+     Igual que la 2, para cuando Windows bloquea los programas.
+
+  NUNCA abras index.html con doble clic: la pantalla no funciona asi.
+
+SALIR DE LA PANTALLA
+  - Ctrl + Shift + Q  (opcion 1)
+  - Alt + F4          (cualquier opcion)
+  - 2-RESPALDO\detener-respaldo.bat cierra Edge y el servidor de las opciones 2 y 3.
+
+PRUEBA TECNICA (antes del evento, en la laptop del stand, con el WiFi apagado)
+  - 1-EJECUTABLE\prueba-tecnica.bat y 2-RESPALDO\prueba-tecnica.bat
+    Muestran una lista de verificaciones. Todo debe salir con palomita y
+    terminar en "TODO BIEN". Si algo sale en rojo, tomar foto y avisar.
+
+AL CIERRE DEL EVENTO
+  - Los datos anonimos de uso quedan en 1-EJECUTABLE\telemetria\ (un archivo por dia).
+    Copia esa carpeta y entregala.

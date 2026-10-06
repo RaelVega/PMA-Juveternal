@@ -1,0 +1,21 @@
+.presionable {
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  touch-action: manipulation;
+  transform-origin: center;
+  transition: transform var(--dur-presion) var(--curva-estandar);
+}
+
+.presionable[data-presionado] {
+  transform: scale(0.97);
+}
+
+.presionable[aria-disabled] {
+  pointer-events: none;
+}

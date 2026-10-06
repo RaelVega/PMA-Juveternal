@@ -1,0 +1,14 @@
+node_modules/
+/dist/
+.DS_Store
+*.psd
+*.ai
+*.indd
+# Material de marketing: se recibe en entrada/ y se ordena en assets-fuente/ (sin versionar, nunca se renombra).
+/assets-fuente/
+/entrada/
+/dist-electron/
+/paquetes/
+/datos-kiosco/
+/telemetria/
+pruebas/visual/resultados/

@@ -1,0 +1,32 @@
+.flecha {
+  position: absolute;
+  top: calc(50% - var(--toque-minimo) / 2);
+  width: var(--toque-minimo);
+  height: var(--toque-minimo);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 2px solid var(--naranja-anahuac);
+  border-radius: 50%;
+  background: var(--superficie);
+  color: var(--naranja-anahuac);
+  box-shadow: var(--sombra-control);
+  touch-action: manipulation;
+}
+
+.anterior {
+  left: 20px;
+}
+
+.siguiente {
+  right: 20px;
+}
+
+.flecha svg {
+  width: 40px;
+  height: 40px;
+}
+
+.espejo {
+  transform: scaleX(-1);
+}

@@ -1,0 +1,22 @@
+.pagina {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* Ficha que aparece: solo opacity, porque los contenedores de InDesign ya llevan su propio transform. */
+.aparece {
+  animation: aparecer var(--dur-ficha) var(--curva-estandar) both;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Respuesta inmediata al tocar un botón del catálogo. */
+.presionado {
+  opacity: 0.72;
+  transition: opacity var(--dur-presion) linear;
+}

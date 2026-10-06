@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "generado": "ingesta/ingerir.mjs — no editar a mano",
+  "imagenes": {
+    "portada-fondo": {
+      "archivo": "img/portada-fondo.webp",
+      "ancho": 1080,
+      "alto": 1920
+    },
+    "portada-titulo": {
+      "archivo": "img/portada-titulo.webp",
+      "ancho": 970,
+      "alto": 259
+    },
+    "portada-banda-superior": {
+      "archivo": "img/portada-banda-superior.webp",
+      "ancho": 913,
+      "alto": 101
+    },
+    "portada-banda-inferior": {
+      "archivo": "img/portada-banda-inferior.webp",
+      "ancho": 904,
+      "alto": 102
+    },
+    "portada-logo-juveternal": {
+      "archivo": "img/portada-logo-juveternal.webp",
+      "ancho": 501,
+      "alto": 141
+    },
+    "portada-logo-anahuac": {
+      "archivo": "img/portada-logo-anahuac.webp",
+      "ancho": 501,
+      "alto": 141
+    },
+    "portada-click-juveternal": {
+      "archivo": "img/portada-click-juveternal.webp",
+      "ancho": 253,
+      "alto": 54
+    },
+    "portada-click-anahuac": {
+      "archivo": "img/portada-click-anahuac.webp",
+      "ancho": 253,
+      "alto": 54
+    },
+    "portada-mano-juveternal": {
+      "archivo": "img/portada-mano-juveternal.webp",
+      "ancho": 172,
+      "alto": 165
+    },
+    "portada-mano-anahuac": {
+      "archivo": "img/portada-mano-anahuac.webp",
+      "ancho": 172,
+      "alto": 165
+    }
+  },
+  "videos": {},
+  "fuentes": {
+    "montserrat": {
+      "archivo": "fuentes/Montserrat-Variable.ttf",
+      "familia": "Montserrat Thin",
+      "peso": "100 900"
+    }
+  },
+  "catalogos": {
+    "anahuac": {
+      "archivo": "catalogos/anahuac/catalogo.json"
+    }
+  }
+}

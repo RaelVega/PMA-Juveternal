@@ -1,0 +1,441 @@
+{
+  "version": 1,
+  "generado": "ingesta/catalogo-indesign.mjs — no editar a mano",
+  "estilos": "catalogos/anahuac/estilos.css",
+  "paginas": [
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-00.html",
+      "origen": "publication.html",
+      "imagenes": [
+        "catalogos/anahuac/img/portada1cata-1080x1920.webp"
+      ],
+      "videos": [
+        "catalogos/anahuac/video/xiu.mp4"
+      ]
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-01.html",
+      "origen": "publication-1.html",
+      "imagenes": [
+        "catalogos/anahuac/img/lithepag1-931x1660.webp",
+        "catalogos/anahuac/img/menta-vibrante-lithe-5-603x651.webp",
+        "catalogos/anahuac/img/impulso-energetico-lithe-3-613x613.webp",
+        "catalogos/anahuac/img/bosque-mistico-lithe-5-654x654.webp",
+        "catalogos/anahuac/img/bannerlithe-1080x1924.webp",
+        "catalogos/anahuac/img/boton-376x101.webp",
+        "catalogos/anahuac/img/boton-1-376x101.webp",
+        "catalogos/anahuac/img/incrustada-771edb6993-546x324.webp",
+        "catalogos/anahuac/img/menta-vibrante-lithe-51-423x402.webp",
+        "catalogos/anahuac/img/equis-62x66.webp",
+        "catalogos/anahuac/img/impulso-energetico-lithe-31-423x402.webp",
+        "catalogos/anahuac/img/bosque-mistico-lithe-51-423x402.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-02.html",
+      "origen": "publication-2.html",
+      "imagenes": [
+        "catalogos/anahuac/img/lithepag2-940x1674.webp",
+        "catalogos/anahuac/img/te-arnica-2-756x756.webp",
+        "catalogos/anahuac/img/te-7-azahares-5-682x645.webp",
+        "catalogos/anahuac/img/bannertestrad-1080x1920.webp",
+        "catalogos/anahuac/img/incrustada-771edb6993-546x324.webp",
+        "catalogos/anahuac/img/te-arnica-21-423x402.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp",
+        "catalogos/anahuac/img/te-7-azahares-3-423x402.webp",
+        "catalogos/anahuac/img/boton-2-459x123.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-03.html",
+      "origen": "publication-3.html",
+      "imagenes": [
+        "catalogos/anahuac/img/tepag3-1019x1811.webp",
+        "catalogos/anahuac/img/te-lavanda-manzanilla-2-613x613.webp",
+        "catalogos/anahuac/img/te-jamaica-canela-2-595x585.webp",
+        "catalogos/anahuac/img/bannertestrad-1080x1920.webp",
+        "catalogos/anahuac/img/boton-2-459x123.webp",
+        "catalogos/anahuac/img/incrustada-4f4091669b-555x297.webp",
+        "catalogos/anahuac/img/te-lavanda-manzanilla-21-430x354.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp",
+        "catalogos/anahuac/img/te-jamaica-canela-21-430x354.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-04.html",
+      "origen": "publication-4.html",
+      "imagenes": [
+        "catalogos/anahuac/img/tepag4-940x1672.webp",
+        "catalogos/anahuac/img/valenox-2-653x570.webp",
+        "catalogos/anahuac/img/valenox-bliss-8-522x533.webp",
+        "catalogos/anahuac/img/valenox-sora-1-653x570.webp",
+        "catalogos/anahuac/img/bannervaleno-1080x1920.webp",
+        "catalogos/anahuac/img/boton-3-387x104.webp",
+        "catalogos/anahuac/img/incrustada-4f4091669b-555x297.webp",
+        "catalogos/anahuac/img/valenox-2-3-1-430x354.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp",
+        "catalogos/anahuac/img/valenox-bliss-6-430x354.webp",
+        "catalogos/anahuac/img/valenox-sora-3-430x354.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-05.html",
+      "origen": "publication-5.html",
+      "imagenes": [
+        "catalogos/anahuac/img/fiopag5-1019x1811.webp",
+        "catalogos/anahuac/img/peptidos-bioactivos-de-colageno-fortibone-fortigel-y-magnesio-1-802x802.webp",
+        "catalogos/anahuac/img/bannerfior-1080x1920.webp",
+        "catalogos/anahuac/img/boton-4-548x147.webp",
+        "catalogos/anahuac/img/incrustada-cbf88fd2c7-555x308.webp",
+        "catalogos/anahuac/img/peptidos-bioactivos-de-colageno-fortibone-fortigel-y-magnesio-11-430x416.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-06.html",
+      "origen": "publication-6.html",
+      "imagenes": [
+        "catalogos/anahuac/img/tepag8-1024x1824.webp",
+        "catalogos/anahuac/img/parchedel-dragon-500x469.webp",
+        "catalogos/anahuac/img/blister-golden-dragon-balm-714x756.webp",
+        "catalogos/anahuac/img/bannergolden-1080x1920.webp",
+        "catalogos/anahuac/img/boton-5-422x114.webp",
+        "catalogos/anahuac/img/incrustada-4f4091669b-555x297.webp",
+        "catalogos/anahuac/img/blister-golden-dragon-balm1-430x416.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp",
+        "catalogos/anahuac/img/parchedel-dragon1-430x416.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-07.html",
+      "origen": "publication-7.html",
+      "imagenes": [
+        "catalogos/anahuac/img/tepag9-1080x1920.webp",
+        "catalogos/anahuac/img/eucamiel-clasico-41-749x740.webp",
+        "catalogos/anahuac/img/eucamiel-clasico-spray-18-658x673.webp",
+        "catalogos/anahuac/img/bannerseucamiel-1080x1920.webp",
+        "catalogos/anahuac/img/boton-6-429x115.webp",
+        "catalogos/anahuac/img/incrustada-46afe60245-555x319.webp",
+        "catalogos/anahuac/img/eucamiel-clasico-2-443x456.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp",
+        "catalogos/anahuac/img/incrustada-e59a8c46dc-555x309.webp",
+        "catalogos/anahuac/img/eucamiel-clasico-spray-13-443x456.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-08.html",
+      "origen": "publication-8.html",
+      "imagenes": [
+        "catalogos/anahuac/img/tepag10-1024x1824.webp",
+        "catalogos/anahuac/img/bannervitas-1080x1920.webp",
+        "catalogos/anahuac/img/copia-de-vitamina-c-2-613x613.webp",
+        "catalogos/anahuac/img/citrato-de-magnesio-1-638x638.webp",
+        "catalogos/anahuac/img/bisglicinato-2-614x614.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp",
+        "catalogos/anahuac/img/incrustada-69a7b918e2-595x349.webp",
+        "catalogos/anahuac/img/vitamina-c-2-405x477.webp",
+        "catalogos/anahuac/img/incrustada-833251e1e6-595x358.webp",
+        "catalogos/anahuac/img/bisglicinato-21-405x492.webp",
+        "catalogos/anahuac/img/boton-7-405x109.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp",
+        "catalogos/anahuac/img/incrustada-b3067c0a14-595x395.webp",
+        "catalogos/anahuac/img/citrato-de-magnesio-11-405x546.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-09.html",
+      "origen": "publication-9.html",
+      "imagenes": [
+        "catalogos/anahuac/img/tepag11-1024x1824.webp",
+        "catalogos/anahuac/img/bannersmartvit-1080x1920.webp",
+        "catalogos/anahuac/img/vitamina-e-1000-2-680x680.webp",
+        "catalogos/anahuac/img/complejo-b-5-697x697.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp",
+        "catalogos/anahuac/img/incrustada-685f8006a8-595x334.webp",
+        "catalogos/anahuac/img/vitamina-e-1000-9-430x462.webp",
+        "catalogos/anahuac/img/incrustada-63bb549b17-595x351.webp",
+        "catalogos/anahuac/img/complejo-b-9-430x462.webp",
+        "catalogos/anahuac/img/boton-8-430x116.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-10.html",
+      "origen": "publication-10.html",
+      "imagenes": [
+        "catalogos/anahuac/img/tepag12-1016x1807.webp",
+        "catalogos/anahuac/img/vitamina-d3-1-844x844.webp",
+        "catalogos/anahuac/img/banneranahuac-1080x1920.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp",
+        "catalogos/anahuac/img/incrustada-685f8006a8-595x334.webp",
+        "catalogos/anahuac/img/vitamina-d3-11-391x462.webp",
+        "catalogos/anahuac/img/boton-9-452x104.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-11.html",
+      "origen": "publication-11.html",
+      "imagenes": [
+        "catalogos/anahuac/img/tepag13-1020x1806.webp",
+        "catalogos/anahuac/img/bannersmega-1078x1908.webp",
+        "catalogos/anahuac/img/aceite-de-krill-1-554x554.webp",
+        "catalogos/anahuac/img/omega-3-con-astaxantina-al-10-3-604x604.webp",
+        "catalogos/anahuac/img/omega-3-5-620x604.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp",
+        "catalogos/anahuac/img/incrustada-685f8006a8-595x334.webp",
+        "catalogos/anahuac/img/aceite-de-krill-9-430x462.webp",
+        "catalogos/anahuac/img/omega-3-9-430x462.webp",
+        "catalogos/anahuac/img/omega-3-con-astaxantina-al-10-9-430x462.webp",
+        "catalogos/anahuac/img/boton-8-430x116.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-12.html",
+      "origen": "publication-12.html",
+      "imagenes": [
+        "catalogos/anahuac/img/tepag14-519x925.webp",
+        "catalogos/anahuac/img/bannerbluumarine-1080x1920.webp",
+        "catalogos/anahuac/img/omega-kids-png-752x928.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp",
+        "catalogos/anahuac/img/incrustada-685f8006a8-595x334.webp",
+        "catalogos/anahuac/img/omega-kids-png1-430x462.webp",
+        "catalogos/anahuac/img/boton-10-537x144.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-13.html",
+      "origen": "publication-13.html",
+      "imagenes": [
+        "catalogos/anahuac/img/tepag15-800x1424.webp",
+        "catalogos/anahuac/img/cogniq-1-756x756.webp",
+        "catalogos/anahuac/img/bannercogniq-1080x1920.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp",
+        "catalogos/anahuac/img/incrustada-685f8006a8-595x334.webp",
+        "catalogos/anahuac/img/cogniq-11-430x462.webp",
+        "catalogos/anahuac/img/boton-11-456x133.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-14.html",
+      "origen": "publication-14.html",
+      "imagenes": [
+        "catalogos/anahuac/img/tepag16-1024x1824.webp",
+        "catalogos/anahuac/img/banneranahuac-1080x1920.webp",
+        "catalogos/anahuac/img/acido-folico-1-806x806.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp",
+        "catalogos/anahuac/img/incrustada-685f8006a8-595x334.webp",
+        "catalogos/anahuac/img/acido-folico-9-430x462.webp",
+        "catalogos/anahuac/img/boton-10-537x144.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-15.html",
+      "origen": "publication-15.html",
+      "imagenes": [
+        "catalogos/anahuac/img/tepag17-1024x1824.webp",
+        "catalogos/anahuac/img/ginseng-con-jalea-real-1-672x672.webp",
+        "catalogos/anahuac/img/ginseng-siberiano-1-672x714.webp",
+        "catalogos/anahuac/img/banneranahuac-1080x1920.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp",
+        "catalogos/anahuac/img/incrustada-685f8006a8-595x334.webp",
+        "catalogos/anahuac/img/ginseng-siberiano-11-430x462.webp",
+        "catalogos/anahuac/img/ginseng-con-jalea-real-11-430x462.webp",
+        "catalogos/anahuac/img/boton-10-537x144.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-16.html",
+      "origen": "publication-16.html",
+      "imagenes": [
+        "catalogos/anahuac/img/tepag18-800x1424.webp",
+        "catalogos/anahuac/img/bannersmartherb-1080x1920.webp",
+        "catalogos/anahuac/img/stress-lmr-2-790x790.webp",
+        "catalogos/anahuac/img/sleep-pvm-6-781x826.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp",
+        "catalogos/anahuac/img/incrustada-685f8006a8-595x334.webp",
+        "catalogos/anahuac/img/stress-lmr-9-459x462.webp",
+        "catalogos/anahuac/img/sleep-pvm-9-459x462.webp",
+        "catalogos/anahuac/img/boton-10-537x144.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-17.html",
+      "origen": "publication-17.html",
+      "imagenes": [
+        "catalogos/anahuac/img/tepag19-1081x1922.webp",
+        "catalogos/anahuac/img/bannersmartherb-1080x1920.webp",
+        "catalogos/anahuac/img/detox-cbs-2-409x554.webp",
+        "catalogos/anahuac/img/focus-gmb-2-409x554.webp",
+        "catalogos/anahuac/img/metabolik-obp-2-392x609.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp",
+        "catalogos/anahuac/img/incrustada-685f8006a8-595x334.webp",
+        "catalogos/anahuac/img/detox-cbs-9-459x462.webp",
+        "catalogos/anahuac/img/focus-gmb-9-459x462.webp",
+        "catalogos/anahuac/img/metabolik-obp-1-459x462.webp",
+        "catalogos/anahuac/img/boton-8-430x116.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-18.html",
+      "origen": "publication-18.html",
+      "imagenes": [
+        "catalogos/anahuac/img/anrtppag18-1024x1824.webp",
+        "catalogos/anahuac/img/bannerantica-1080x1920.webp",
+        "catalogos/anahuac/img/arnica-1-479x479.webp",
+        "catalogos/anahuac/img/magistral-1-479x479.webp",
+        "catalogos/anahuac/img/tepezcohuite-1-479x479.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp",
+        "catalogos/anahuac/img/incrustada-685f8006a8-595x334.webp",
+        "catalogos/anahuac/img/ecomerce-antica-tepezcohuite1-459x462.webp",
+        "catalogos/anahuac/img/arnica-11-459x462.webp",
+        "catalogos/anahuac/img/magistral-11-459x462.webp",
+        "catalogos/anahuac/img/boton-8-430x116.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp",
+        "catalogos/anahuac/img/incrustada-3bf0ce568e-13x8.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-19.html",
+      "origen": "publication-19.html",
+      "imagenes": [
+        "catalogos/anahuac/img/antpag19-1024x1824.webp",
+        "catalogos/anahuac/img/bannerantica-1080x1920.webp",
+        "catalogos/anahuac/img/lavanda-1-479x479.webp",
+        "catalogos/anahuac/img/pan-puerco-1-479x479.webp",
+        "catalogos/anahuac/img/calendula-1-479x479.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp",
+        "catalogos/anahuac/img/incrustada-685f8006a8-595x334.webp",
+        "catalogos/anahuac/img/lavanda-11-459x462.webp",
+        "catalogos/anahuac/img/calendula-11-459x462.webp",
+        "catalogos/anahuac/img/pan-puerco-11-459x462.webp",
+        "catalogos/anahuac/img/boton-8-430x116.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-20.html",
+      "origen": "publication-20.html",
+      "imagenes": [
+        "catalogos/anahuac/img/anrtppag20-1024x1824.webp",
+        "catalogos/anahuac/img/bannerantica-1080x1920.webp",
+        "catalogos/anahuac/img/eucalipto-y-tomillo-1-479x479.webp",
+        "catalogos/anahuac/img/oriental-1-479x479.webp",
+        "catalogos/anahuac/img/aloe-vera-antica-497x506.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp",
+        "catalogos/anahuac/img/incrustada-685f8006a8-595x334.webp",
+        "catalogos/anahuac/img/aloe-vera-antica1-459x462.webp",
+        "catalogos/anahuac/img/eucalipto-y-tomillo-11-459x462.webp",
+        "catalogos/anahuac/img/oriental-11-459x462.webp",
+        "catalogos/anahuac/img/boton-8-430x116.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-21.html",
+      "origen": "publication-21.html",
+      "imagenes": [
+        "catalogos/anahuac/img/doshpag21-940x1674.webp",
+        "catalogos/anahuac/img/bannerdosha-1080x1920.webp",
+        "catalogos/anahuac/img/shilajit-1-576x714.webp",
+        "catalogos/anahuac/img/curcumin-3-552x746.webp",
+        "catalogos/anahuac/img/incrustada-685f8006a8-595x334.webp",
+        "catalogos/anahuac/img/shilajit-9-459x462.webp",
+        "catalogos/anahuac/img/curcumin-9-459x462.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp",
+        "catalogos/anahuac/img/boton-10-537x144.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-22.html",
+      "origen": "publication-22.html",
+      "imagenes": [
+        "catalogos/anahuac/img/encypag22-800x1424.webp",
+        "catalogos/anahuac/img/bannersmartceu-1080x1920.webp",
+        "catalogos/anahuac/img/encypro-1-829x829.webp",
+        "catalogos/anahuac/img/boton-12-466x130.webp",
+        "catalogos/anahuac/img/incrustada-685f8006a8-595x334.webp",
+        "catalogos/anahuac/img/encypro-9-459x462.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-23.html",
+      "origen": "publication-23.html",
+      "imagenes": [
+        "catalogos/anahuac/img/encypag23-1024x1824.webp",
+        "catalogos/anahuac/img/banneranahuac-1080x1920.webp",
+        "catalogos/anahuac/img/arandano-cranberry-1-916x916.webp",
+        "catalogos/anahuac/img/boton-13-586x144.webp",
+        "catalogos/anahuac/img/incrustada-685f8006a8-595x334.webp",
+        "catalogos/anahuac/img/arandano-cranberry-4-459x462.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-24.html",
+      "origen": "publication-24.html",
+      "imagenes": [
+        "catalogos/anahuac/img/encypag24-1009x1794.webp",
+        "catalogos/anahuac/img/banneranahuac-1080x1920.webp",
+        "catalogos/anahuac/img/sambucus-607x929.webp",
+        "catalogos/anahuac/img/boton-14-484x144.webp",
+        "catalogos/anahuac/img/incrustada-685f8006a8-595x334.webp",
+        "catalogos/anahuac/img/sambucus-4-459x462.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp",
+        "catalogos/anahuac/img/equis1-62x66.webp"
+      ],
+      "videos": []
+    },
+    {
+      "archivo": "catalogos/anahuac/paginas/pagina-25.html",
+      "origen": "publication-25.html",
+      "imagenes": [
+        "catalogos/anahuac/img/contraportada-1080x1920.webp",
+        "catalogos/anahuac/img/icono-home-164x136.webp"
+      ],
+      "videos": []
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "_pendientes": [
+    "Juveternal: falta su proyecto de InDesign (y las fichas). Mientras tanto, tocar su lado del salvapantallas no abre nada (marcas.juveternal.catalogo = null).",
+    "Catálogo Anáhuac: el export no trae las fuentes Speeday (pág. 6, «DALE PAUSA…») ni Brush Script MT (pág. 14), y hay que confirmar su licencia; ahora salen con la letra de respaldo.",
+    "Icono del ejecutable y favicon: provisionales (ingesta/icono.mjs); falta el de marketing.",
+    "Aviso de inactividad y pantalla de fallo: textos y forma tomados de Biocaps, donde se aprobaron; marketing no los dibujó para esta pantalla."
+  ],
+  "_portada": "Posiciones (px del lienzo) medidas al píxel contra la composición final de marketing (assets-fuente/portada/fondo_anahuacjuveternal.png).",
+  "portada": {
+    "fondo": { "imagen": "portada-fondo", "x": 0, "y": 0 },
+    "bandaSuperior": { "imagen": "portada-banda-superior", "x": 0, "y": 307 },
+    "bandaInferior": { "imagen": "portada-banda-inferior", "x": 176, "y": 407 },
+    "titulo": { "imagen": "portada-titulo", "x": 63, "y": 291 },
+    "marcas": [
+      {
+        "id": "juveternal",
+        "lado": "izquierda",
+        "logo": { "imagen": "portada-logo-juveternal", "x": 17, "y": 903 },
+        "click": { "imagen": "portada-click-juveternal", "x": 128, "y": 1062 },
+        "mano": { "imagen": "portada-mano-juveternal", "x": 53, "y": 1095 },
+        "zona": [0, 640, 540, 1280],
+        "catalogo": null
+      },
+      {
+        "id": "anahuac",
+        "lado": "derecha",
+        "logo": { "imagen": "portada-logo-anahuac", "x": 562, "y": 903 },
+        "click": { "imagen": "portada-click-anahuac", "x": 693, "y": 1062 },
+        "mano": { "imagen": "portada-mano-anahuac", "x": 832, "y": 1095 },
+        "zona": [540, 640, 540, 1280],
+        "catalogo": "anahuac"
+      }
+    ]
+  },
+  "catalogo": {
+    "anterior": "Página anterior",
+    "siguiente": "Página siguiente"
+  },
+  "aviso": { "titulo": "¿SIGUES AHÍ?", "texto": "Toca la pantalla para continuar" }
+}

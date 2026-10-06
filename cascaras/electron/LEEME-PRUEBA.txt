@@ -1,0 +1,12 @@
+ANAHUAC + JUVETERNAL - PANTALLA TACTIL - PAQUETE DE PRUEBA PARA WINDOWS
+==========================================================
+
+1. Antes de descomprimir: clic derecho en el .zip > Propiedades > marcar "Desbloquear" > Aceptar.
+2. Clic derecho en el .zip > Extraer todo... > al Escritorio. Nunca lo abras desde dentro del zip.
+3. Entra a la carpeta y elige:
+     - El .exe (doble clic): modo kiosco, pantalla completa, como en el evento. Cursor oculto.
+     - probar-en-ventana.bat: en una ventana y con cursor, para probar con mouse.
+     - prueba-tecnica.bat: lista de verificaciones; todo debe terminar en "TODO BIEN".
+4. Si Windows dice "Windows protegio tu PC": Mas informacion > Ejecutar de todas formas.
+5. Salir: Ctrl + Shift + Q (o Alt + F4).
+

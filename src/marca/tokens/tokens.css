@@ -1,0 +1,30 @@
+/*
+ * Tokens de la pantalla dual. Colores medidos en las piezas de marketing
+ * (salvapantallas, 05-10). Los CSS de src/marca/ solo usan var(--…) de aquí.
+ */
+:root {
+  --naranja-anahuac: #e94e1a;
+  --turquesa-juveternal: #28b2a9;
+  --blanco: #ffffff;
+  --superficie: #fffdf8;
+  --texto: #2b2b2b;
+  --texto-suave: #5f5f5f;
+  --velo-aviso: rgb(20 20 20 / 0.55);
+  --sombra-tarjeta: 0 24px 64px rgb(0 0 0 / 0.25);
+  --sombra-control: 0 8px 24px rgb(0 0 0 / 0.22);
+
+  --familia-interfaz: 'Montserrat Thin', system-ui, sans-serif;
+  --cuerpo-titulo: 64px;
+  --cuerpo-texto: 34px;
+  --cuerpo-detalle: 24px;
+  --peso-titulo: 800;
+  --peso-texto: 500;
+
+  --radio-tarjeta: 48px;
+  --radio-pastilla: 999px;
+  --toque-minimo: 88px;
+}
+
+body {
+  font-family: var(--familia-interfaz);
+}

@@ -1,0 +1,97 @@
+/* Pantalla temporal de la prueba de humo: no forma parte del diseño ni usa tokens. */
+.pantalla {
+  position: absolute;
+  inset: 0;
+  font-family: 'Interfaz', sans-serif;
+  color: #505050;
+}
+
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.panel {
+  position: absolute;
+  top: 100px;
+  left: 60px;
+  right: 60px;
+  padding: 48px;
+  border-radius: 24px;
+  background: rgb(255 255 255 / 0.94);
+}
+
+.titulo {
+  margin: 0;
+  font-size: 73.7px;
+  font-weight: 900;
+  line-height: 1.03;
+}
+
+.version {
+  margin: 8px 0 32px;
+  font-size: 24px;
+}
+
+.lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 20px;
+}
+
+.lista li {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  column-gap: 12px;
+  font-size: 30px;
+}
+
+.marca {
+  grid-row: span 2;
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.ok .marca {
+  color: #1a7f37;
+}
+
+.fallo .marca,
+.fallo .detalle {
+  color: #c0162c;
+}
+
+.nombre {
+  font-weight: 800;
+}
+
+.detalle {
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+
+.etiqueta {
+  margin: 36px 0 0;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.estado {
+  margin: 24px 0 0;
+  font-size: 50px;
+  font-weight: 900;
+}
+
+.frasco {
+  position: absolute;
+  left: 60px;
+  bottom: 120px;
+  width: 360px;
+  height: auto;
+  will-change: transform;
+}
